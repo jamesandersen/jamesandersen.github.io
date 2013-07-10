@@ -497,4 +497,5 @@ textarea[contenteditable] {
 }
 body .excerpt {
   font-size: 10px;
+  font-style: italic;
 }
