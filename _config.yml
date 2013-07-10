@@ -1,1 +1,9 @@
 auto: true
+pygments: false
+
+title : Jander.me
+
+author :
+  name : James Andersen
+  github : jamesandersen
+  twitter : jandersen78

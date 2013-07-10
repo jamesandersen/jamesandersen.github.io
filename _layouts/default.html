@@ -1,71 +1,69 @@
-<!DOCTYPE html>
-
+﻿<!DOCTYPE html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-<head>
-  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<!--[if IEMobile 7 ]>    <html class="no-js iem7"> <![endif]-->
+<!--[if (gt IEMobile 7)|!(IEMobile)]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <title>{{ page.title }}</title>
+        <meta name="description" content="">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <!-- Set the viewport width to device width for mobile -->
+        <meta name="viewport" content="width=device-width" />
+        <meta http-equiv="cleartype" content="on">
+    
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/touch/apple-touch-icon-144x144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/touch/apple-touch-icon-114x114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/touch/apple-touch-icon-72x72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="img/touch/apple-touch-icon-57x57-precomposed.png">
+        <link rel="shortcut icon" href="img/touch/apple-touch-icon.png">
 
-  <!-- Set the viewport width to device width for mobile -->
-  <meta name="viewport" content="width=device-width" />
+        <!-- Tile icon for Win8 (144x144 + tile color) -->
+        <meta name="msapplication-TileImage" content="img/touch/apple-touch-icon-144x144-precomposed.png">
+        <meta name="msapplication-TileColor" content="#222222">
 
-  <title>{{ page.title }}</title>
-
-  <!-- CSS Files -->
-  <link rel="stylesheet" href="assets/css/app.css">
-
-  
-<!-- JS Files -->
-  	<!-- Initialize JS Plugins -->
-    <!-- Latest version of jQuery -->
-  
-
-  	<script src="assets/js/foundation/modernizr.foundation.js"></script>
-
-
-  <!-- IE Fix for HTML5 Tags -->
-  <!--[if lt IE 9]>
-    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
-  
-
-</head>
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
 	<body>
 		
-<!-- Whole Body Div -->
-<div class="row">
-<div class="twelve columns centered">
+        <!-- Whole Body Div -->
+        <div class="row">
+        <div class="twelve columns centered">
 
 
-{% include nav.html %}
+        {% include nav.html %}
 
-<!-- Main page content -->
-<div id="wrapper">
-
-
-	{{ content }}	
-
-
-<!-- end wrapper -->	
-</div>
+        <!-- Main page content -->
+        <div id="wrapper">
+	        {{ content }}	
+        </div>
 
 
 
-  <!-- End Whole-Body Div -->
-  </div>
-</div>
+          <!-- End Whole-Body Div -->
+          </div>
+        </div>
 
 
-  <!-- Included JS Files (Unminified) -->
-  <!-- [JS Files] -->
-  <!-- We include all the unminified JS as well. Uncomment to use them instead -->
+        <script src="js/vendor/jquery-2.0.3.min.js"></script>
+        <script src="js/helper.js"></script>
+        <script src="js/main.js"></script>
 
-    <script src="assets/js/foundation/jquery.js"></script>
-    <script src="assets/js/foundation/foundation.min.js"></script>
-    <script src="assets/js/foundation/app.js"></script>
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-</body>
+            ga('create', 'UA-42330723-1', 'jander.me');
+            ga('send', 'pageview');
+        </script>
+
+    </body>
 </html>
-
-

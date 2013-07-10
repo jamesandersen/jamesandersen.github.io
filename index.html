@@ -13,7 +13,10 @@ title: Welcome!
   <li id="simple3Tab">This is simple tab 3s content.</li>
 </ul>
 <h1>this is the default index page!</h1>
-
+<!-- This loops through the site posts -->
+{% for post in site.posts %}
+<a href="{{post.url}}">{{ post.date | date_to_string }} » {{ post.title }}</a>
+{% endfor %}
 <!-- breaks, because we don't have any CSS yet -->
 <br>
 
