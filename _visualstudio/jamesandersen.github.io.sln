@@ -23,6 +23,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "jamesandersen.github.io", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4CD483CC-CB31-4E0E-B5CB-8BCA4842A0E8}"
 	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\..\Users\James\AppData\Local\Microsoft\VisualStudio\11.0\Extensions\jby0ufge.pa0\schemas\WE-Palette.css = ..\..\..\..\..\Users\James\AppData\Local\Microsoft\VisualStudio\11.0\Extensions\jby0ufge.pa0\schemas\WE-Palette.css
 		WE-settings.xml = WE-settings.xml
 	EndProjectSection
 EndProject
