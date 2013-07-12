@@ -349,6 +349,18 @@
   filter: e(%("progid:DXImageTransform.Microsoft.gradient(enabled = false)"));
 }
 
+// Pseudo Block
+.pseudo-block() {
+    &:before, &:after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+}
+
 // Grid System
 // -----------
 

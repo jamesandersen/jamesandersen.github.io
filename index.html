@@ -5,6 +5,7 @@ title: Welcome!
 <!-- This loops through the site posts -->
 {% for post in site.posts %}
 <div class="post">
+    <div class="shadow"></div>
     <div class="date-block">
         <div class="date">{{ post.date | date: "%d" }}</div>
         <div class="month">{{ post.date | date: "%B" }}</div>
