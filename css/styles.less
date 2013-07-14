@@ -20,9 +20,10 @@ textarea {
     color: #222;
 }
 
-body {
+html, body {
     font-size: 1em;
     line-height: 1.4;
+    height: 100%;
 }
 
 a {
@@ -67,9 +68,8 @@ textarea {
 // --------------------------------------------------
 
 body {
-    
+    height: 100%;
     position: relative;
-
     &:before, &:after {
         content: '';
         position: fixed;
@@ -83,7 +83,7 @@ body {
         position: fixed;
         top: 0; left: 0; right: 0; bottom: 0;
         z-index: -2;
-        #gradient.vertical-three-colors(#555, #444, 65%, #222);
+        #gradient.vertical-three-colors(#3F83A8, #226B98, 65%, @blueDark);
     }
     &:after {
         z-index: -1;
@@ -94,7 +94,7 @@ body {
 
 header {
     display: block;
-    background-color: @grayDarker;
+    background-color: @blueDark;
     color: #efefef;
     font-size: 18px;
     padding: 4px 20px;
@@ -113,9 +113,22 @@ header {
     }
 }
 
+
+#main-content {
+    max-width: 1024px;
+    min-height: 100%;
+    margin: 0px auto;
+    padding-top: 40px;
+    .box-sizing(border-box);
+    border-top-width: 50px;
+    background: rgba(83, 143, 177, 0.3) url('/img/masthead.jpg') center top no-repeat padding-box;
+    .box-shadow(1px 3px 16px rgba(50, 50, 50, 0.59));   
+}
+
+
 #wrapper {
     max-width: 900px;
-    margin: 50px auto;
+    margin: 0px auto;
 
     @date-size: 100px;
     .post {
@@ -135,6 +148,8 @@ header {
             font-size: 40px;
             text-decoration: none;
             &:visited { color: @textColor; }
+            -webkit-text-stroke: 0.25px;
+            font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
         }
 
         .date-block {
@@ -190,6 +205,12 @@ header {
 
         .content, .excerpt {
             .content-columns(2);
+
+            img {
+                max-width: 100%;
+                height: auto;
+                margin: 15px 0px;
+            }
         }
 
         .excerpt {
