@@ -4,7 +4,7 @@ comments: true
 date: 2007-10-28 04:46:09+00:00
 layout: post
 slug: a-php-proxy-for-flex-or-anything
-title: A PHP Proxy for Flex (or anything…)
+title: A PHP Proxy for Flex (or anything...)
 wordpress_id: 20
 categories:
 - Flex

@@ -10,4 +10,4 @@ wordpress_id: 7
 
 ...useful with the "could not find tsearch config by locale" error `pg_controldata [data dir] | grep LC`
 Finding PostgreSQL data directory
-...since I continually forget where mine is… ` find / -name data`
+...since I continually forget where mine isâ€¦ ` find / -name data`

@@ -30,10 +30,22 @@
 	<body>
 	    <div id="main-content">
 	        <!-- Main page content -->
-            <div id="wrapper">
+	        <div id="wrapper">
 	            {{ content }}	
-            </div>
-        </div>
+	        </div>
+	        <div id="sidebar">
+	        <!-- This loops through the site categories -->
+            {% for category in site.categories %} 
+            <h2 id="{{ category[0] }}-ref">{{ category[0] }}</h2>
+            <ul>
+              {% for post in category[1] %} 
+                <li><a href="{{ post.url }}">{{ post.title }}</a></li> 
+              {% endfor %}
+            </ul>
+            <p><a href="#{{ category[0] }}-ref">&#8617;</a></p>
+            {% endfor %}
+	        </div>
+	    </div>
         {% include header.html %}
         <script src="/js/vendor/jquery-2.0.3.min.js"></script>
         <script src="/js/helper.js"></script>

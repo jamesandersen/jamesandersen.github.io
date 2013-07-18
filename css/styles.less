@@ -1,5 +1,7 @@
 @import-once "normalize.css";
+@import-once "variables.less";
 @import-once "mixins.less";
+
 /*
  * HTML5 Boilerplate
  *
@@ -119,16 +121,24 @@ header {
     min-height: 100%;
     margin: 0px auto;
     padding-top: 40px;
+    padding-left: 15px;
+    padding-right: 10px;
     .box-sizing(border-box);
     border-top-width: 50px;
     background: rgba(83, 143, 177, 0.3) url('/img/masthead.jpg') center top no-repeat padding-box;
     .box-shadow(1px 3px 16px rgba(50, 50, 50, 0.59));   
 }
 
+#sidebar {
+    max-width: 19%;
+    float: right; // todo
+    font-size: 12px;
+}
 
 #wrapper {
-    max-width: 900px;
-    margin: 0px auto;
+    max-width: 80%;
+    float: left;
+    //margin: 0px auto;
 
     @date-size: 100px;
     .post {
@@ -207,9 +217,9 @@ header {
             .content-columns(2);
 
             img {
-                max-width: 100%;
+                max-width: 95%;
                 height: auto;
-                margin: 15px 0px;
+                margin: 15px auto;
             }
         }
 
@@ -337,7 +347,7 @@ textarea[contenteditable] {
    Modify as content requires.
    ========================================================================== */
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1000px) {
     /* Style adjustments for viewports that meet the condition */
     #wrapper {
 

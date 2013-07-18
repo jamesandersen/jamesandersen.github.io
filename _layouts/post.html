@@ -10,4 +10,11 @@ layout: default
     
     <span class="post-title">{{ page.title }}</span>
     <div class="content">{{ content }}</div>
+    <div class="categories">
+        <!-- This loops through the post categories -->
+        {% for cat in page.categories %}
+        <span class="category">{{cat}}</span>
+        {% if forloop.last %}{% else %},&nbsp;{% endif %}
+        {% endfor %}
+    </div>
 </div>

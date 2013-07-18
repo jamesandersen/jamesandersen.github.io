@@ -123,6 +123,8 @@ header nav {
   min-height: 100%;
   margin: 0px auto;
   padding-top: 40px;
+  padding-left: 15px;
+  padding-right: 10px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -132,9 +134,14 @@ header nav {
   -moz-box-shadow: 1px 3px 16px rgba(50, 50, 50, 0.59);
   box-shadow: 1px 3px 16px rgba(50, 50, 50, 0.59);
 }
+#sidebar {
+  max-width: 19%;
+  float: right;
+  font-size: 12px;
+}
 #wrapper {
-  max-width: 900px;
-  margin: 0px auto;
+  max-width: 80%;
+  float: left;
 }
 #wrapper .post {
   background-color: rgba(230, 230, 230, 0.8);
@@ -239,9 +246,9 @@ header nav {
 }
 #wrapper .post .content img,
 #wrapper .post .excerpt img {
-  max-width: 100%;
+  max-width: 95%;
   height: auto;
-  margin: 15px 0px;
+  margin: 15px auto;
 }
 #wrapper .post .excerpt {
   font-style: italic;
@@ -339,7 +346,7 @@ textarea[contenteditable] {
    Theses examples override the primary ('mobile first') styles.
    Modify as content requires.
    ========================================================================== */
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1000px) {
   /* Style adjustments for viewports that meet the condition */
   #wrapper .post a.post-title {
     font-size: 30px;
