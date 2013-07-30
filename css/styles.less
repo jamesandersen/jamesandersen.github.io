@@ -1,7 +1,7 @@
 @import-once "normalize.css";
 @import-once "variables.less";
 @import-once "mixins.less";
-
+@import-once "pygments.css";
 /*
  * HTML5 Boilerplate
  *
@@ -214,7 +214,17 @@ header {
         }
 
         .content, .excerpt {
+            
+            /* Firefox doesn't support column-span... 
+                need to come up with some solution before
+                enabling columns
             .content-columns(2);
+            .highlight {
+                -webkit-column-span: all;
+                -moz-column-span: all;
+                column-span: all;
+            }
+            */
 
             img {
                 max-width: 95%;

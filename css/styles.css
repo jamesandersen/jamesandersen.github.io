@@ -1,4 +1,6 @@
 ﻿@import "normalize.css";
+
+@import "pygments.css";
 .input-block-level {
   display: block;
   width: 100%;
@@ -237,12 +239,17 @@ header nav {
 }
 #wrapper .post .content,
 #wrapper .post .excerpt {
-  -webkit-column-count: 2;
-  -moz-column-count: 2;
-  column-count: 2;
-  -webkit-column-gap: 20px;
-  -moz-column-gap: 20px;
-  column-gap: 20px;
+  /* Firefox doesn't support column-span... 
+                need to come up with some solution before
+                enabling columns
+            .content-columns(2);
+            .highlight {
+                -webkit-column-span: all;
+                -moz-column-span: all;
+                column-span: all;
+            }
+            */
+
 }
 #wrapper .post .content img,
 #wrapper .post .excerpt img {
