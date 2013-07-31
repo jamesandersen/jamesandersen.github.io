@@ -132,18 +132,52 @@ header nav {
   box-sizing: border-box;
   border-top-width: 50px;
   background: rgba(83, 143, 177, 0.3) url('/img/masthead.jpg') center top no-repeat padding-box;
+  background-attachment: fixed;
   -webkit-box-shadow: 1px 3px 16px rgba(50, 50, 50, 0.59);
   -moz-box-shadow: 1px 3px 16px rgba(50, 50, 50, 0.59);
   box-shadow: 1px 3px 16px rgba(50, 50, 50, 0.59);
 }
 #sidebar {
-  max-width: 19%;
+  padding-top: 20px;
+  width: 19%;
   float: right;
   font-size: 12px;
+  position: relative;
+}
+#sidebar .tabs {
+  cursor: pointer;
+}
+#sidebar section {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+#sidebar .sidebar-show,
+#sidebar .sidebar-hide {
+  -webkit-transition: 1s linear all;
+  -moz-transition: 1s linear all;
+  -o-transition: 1s linear all;
+  transition: 1s linear all;
+  -webkit-perspective: 600px;
+}
+#sidebar .sidebar-show {
+  opacity: 0;
+  -webkit-transform: rotateY(180deg);
+}
+#sidebar .sidebar-show.sidebar-show-active {
+  opacity: 1;
+  -webkit-transform: rotateY(0deg);
+}
+#sidebar .sidebar-hide {
+  opacity: 1;
+  -webkit-transform: rotateY(0deg);
+}
+#sidebar .sidebar-hide.sidebar-hide-active {
+  opacity: 0;
+  -webkit-transform: rotateY(-180deg);
 }
 #wrapper {
-  max-width: 80%;
-  float: left;
+  width: 80%;
 }
 #wrapper .post {
   background-color: rgba(230, 230, 230, 0.8);

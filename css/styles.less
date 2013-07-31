@@ -126,18 +126,43 @@ header {
     .box-sizing(border-box);
     border-top-width: 50px;
     background: rgba(83, 143, 177, 0.3) url('/img/masthead.jpg') center top no-repeat padding-box;
+    background-attachment: fixed;
     .box-shadow(1px 3px 16px rgba(50, 50, 50, 0.59));   
 }
 
 #sidebar {
-    max-width: 19%;
+    padding-top: 20px;
+    width: 19%;
     float: right; // todo
     font-size: 12px;
+    position: relative;
+
+    .tabs {
+        &:hover {
+            
+        }
+        cursor: pointer;
+    }
+
+    section {
+        position: absolute;
+        left: 0; right: 0;
+    }
+
+    .sidebar-show, .sidebar-hide {
+        .transition(1s linear all);
+        -webkit-perspective: 600px;
+    }
+
+    .sidebar-show { opacity: 0; -webkit-transform: rotateY( 180deg );}
+    .sidebar-show.sidebar-show-active { opacity: 1; -webkit-transform: rotateY( 0deg );}
+    .sidebar-hide { opacity: 1; -webkit-transform: rotateY( 0deg );}
+    .sidebar-hide.sidebar-hide-active { opacity: 0; -webkit-transform: rotateY( -180deg );}
 }
 
 #wrapper {
-    max-width: 80%;
-    float: left;
+    width: 80%;
+    //float: left;
     //margin: 0px auto;
 
     @date-size: 100px;
