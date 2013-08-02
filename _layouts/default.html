@@ -32,7 +32,7 @@
 	                <span data-ng-click="sidebar = 'archive'">Archive</span>&nbsp;|&nbsp;
                     <span data-ng-click="sidebar = 'categories'">Categories</span>
 	            </div>
-	            <section id="archive" data-ng-show="sidebar == 'archive'" data-ng-animate="{ show: 'sidebar-show', hide: 'sidebar-hide'}">
+	            <section class="archive" data-ng-show="sidebar == 'archive'" data-ng-animate="{ show: 'sidebar-show', hide: 'sidebar-hide'}">
 	                <h3>This year's posts</h3>
 	                {%for post in site.posts %}
 	                {% unless post.next %}
@@ -46,7 +46,7 @@
 	                <ul class="past">
 	                    {% endif %}
 	                    {% endunless %}
-	                    <li><time>{{ post.date | date:"%d %b" }}</time><a href="{{ post.url }}">{{ post.title }}</a></li>
+	                    <li><a href="{{ post.url }}"><time>{{ post.date | date:"%d %b" }}</time>{{ post.title }}</a></li>
 	                    {% endfor %}
 	                </ul>
 	            </section>
@@ -54,7 +54,7 @@
 	            <section id="categories" data-ng-hide="sidebar != 'categories'" data-ng-animate="{ show: 'sidebar-show', hide: 'sidebar-hide'}">
 	                <!-- This loops through the site categories -->
 	                {% for category in site.categories %} 
-	                <h2 id="{{ category[0] }}-ref">{{ category[0] }}</h2>
+	                <h3 id="{{ category[0] }}-ref">{{ category[0] }}</h3>
 	                <ul>
 	                    {% for post in category[1] %} 
 	                    <li><a href="{{ post.url }}">{{ post.title }}</a></li> 
