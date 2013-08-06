@@ -27,7 +27,7 @@
     </head>
 	<body>
 	    <div id="main-content">
-	        <div id="sidebar" data-ng-controller="SidebarCtrl" data-ng-init="sidebar = 'archive'">
+	        <div id="sidebar" data-ng-controller="SidebarCtrl" data-ng-animate="{ show: 'nav-show', hide: 'nav-hide'}" data-ng-init="sidebar = 'archive'">
 	            <div class="tabs">
 	                <span data-ng-click="sidebar = 'archive'">Archive</span>&nbsp;|&nbsp;
                     <span data-ng-click="sidebar = 'categories'">Categories</span>
@@ -51,7 +51,7 @@
 	                </ul>
 	            </section>
                 
-	            <section id="categories" data-ng-hide="sidebar != 'categories'" data-ng-animate="{ show: 'sidebar-show', hide: 'sidebar-hide'}">
+	            <section class="categories" data-ng-hide="sidebar != 'categories'" data-ng-animate="{ show: 'sidebar-show', hide: 'sidebar-hide'}">
 	                <!-- This loops through the site categories -->
 	                {% for category in site.categories %} 
 	                <h3 id="{{ category[0] }}-ref">{{ category[0] }}</h3>
@@ -60,7 +60,7 @@
 	                    <li><a href="{{ post.url }}">{{ post.title }}</a></li> 
 	                    {% endfor %}
 	                </ul>
-	                <p><a href="#{{ category[0] }}-ref">&#8617;</a></p>
+	                {% comment %}<p><a href="#{{ category[0] }}-ref">&#8617;</a></p>{% endcomment %}
 	                {% endfor %}
 	            </section>
 	        </div>
@@ -70,13 +70,31 @@
 	        </div>
 	        
 	    </div>
-        {% include header.html %}
+	    {% include header.html %}
+        {% comment %}
 	    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 	    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-mobile.min.js"></script>
+	    <script src="/js/vendor/enquire.min.js"></script>
         <script src="/js/helper.js"></script>
-        <script src="/js/main.js"></script>
+	    <script src="/js/main.js"></script>
+        {% endcomment %}
         <script>
+            Modernizr.load([
+                //first test need for polyfill
+                {
+                    test: window.matchMedia,
+                    nope: "/js/vendor/media.match.min.js"
+                },
+                "//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js",
+                "//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js",
+                "//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-mobile.min.js",
+                //and then load enquire
+                "/js/vendor/enquire.min.js",
+                "/js/helper.js",
+                "/js/main.js"
+            ]);
+
             (function (i, s, o, g, r, a, m) {
                 i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
                     (i[r].q = i[r].q || []).push(arguments)

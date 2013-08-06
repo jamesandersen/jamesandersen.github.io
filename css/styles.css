@@ -120,6 +120,9 @@ header nav {
   display: inline-block;
   float: right;
 }
+header nav .contents {
+  display: none;
+}
 #main-content {
   max-width: 1024px;
   min-height: 100%;
@@ -203,13 +206,16 @@ header nav {
 #sidebar section.archive ul li:first-letter {
   margin-left: -45px;
 }
+#sidebar section.categories ul li:first-letter {
+  font-weight: bold;
+}
 #sidebar .sidebar-show,
 #sidebar .sidebar-hide {
   -webkit-transition: 1s linear all;
   -moz-transition: 1s linear all;
   -o-transition: 1s linear all;
   transition: 1s linear all;
-  -webkit-perspective: 600px;
+  -webkit-perspective: 200px;
 }
 #sidebar .sidebar-show {
   opacity: 0;
@@ -451,6 +457,88 @@ textarea[contenteditable] {
     -webkit-column-gap: 20px;
     -moz-column-gap: 20px;
     column-gap: 20px;
+  }
+}
+@media only screen and (max-width: 700px) {
+  /* Style adjustments for viewports that meet the condition */
+  header nav .contents {
+    display: inline-block;
+  }
+  #wrapper {
+    width: 100%;
+  }
+  #sidebar {
+    padding-top: 20px;
+    width: 100%;
+    float: none;
+    position: fixed;
+    z-index: 100;
+    display: none;
+  }
+  #sidebar .nav-show,
+  #sidebar .nav-hide {
+    -webkit-transition: 1s linear all;
+    -moz-transition: 1s linear all;
+    -o-transition: 1s linear all;
+    transition: 1s linear all;
+  }
+  #sidebar .nav-show {
+    opacity: 0;
+  }
+  #sidebar .nav-show.nav-show-active {
+    opacity: 1;
+  }
+  #sidebar .nav-hide {
+    opacity: 1;
+  }
+  #sidebar .nav-hide.nav-hide-active {
+    opacity: 0;
+  }
+  #sidebar section {
+    position: static;
+  }
+  #sidebar section ul {
+    padding-left: 5px;
+  }
+  #sidebar section ul li {
+    -webkit-transition: 0.3s linear all;
+    -moz-transition: 0.3s linear all;
+    -o-transition: 0.3s linear all;
+    transition: 0.3s linear all;
+    margin-left: 5px;
+    color: #555555;
+    list-style: inside none;
+    margin-bottom: 4px;
+  }
+  #sidebar section ul li:hover,
+  #sidebar section ul li:focus {
+    margin-left: -5px;
+    margin-right: 10px;
+    color: #003261;
+  }
+  #sidebar section ul li a,
+  #sidebar section ul li a:visited {
+    color: inherit;
+    text-decoration: none;
+  }
+  #sidebar section ul li a:hover {
+    text-decoration: underline;
+  }
+  #sidebar section ul li time {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  #sidebar section ul li time:after {
+    content: '  ';
+  }
+  #sidebar section.archive ul li {
+    padding-left: 45px;
+  }
+  #sidebar section.archive ul li:first-letter {
+    margin-left: -45px;
+  }
+  #sidebar section.categories ul li:first-letter {
+    font-weight: bold;
   }
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
