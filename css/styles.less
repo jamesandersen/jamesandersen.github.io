@@ -134,7 +134,7 @@ header {
 
 #sidebar {
     padding-top: 20px;
-    width: 19.3%;
+    width: 180px;
     float: right; // todo
     font-size: 12px;
     position: relative;
@@ -202,7 +202,10 @@ header {
 }
 
 #wrapper {
-    width: 80%;
+    width: 100%;
+    border-right: 190px solid transparent;
+    border-bottom: 20px solid transparent;
+    .box-sizing(border-box);
     //float: left;
     //margin: 0px auto;
 
@@ -446,24 +449,30 @@ textarea[contenteditable] {
     header nav .contents { display: inline-block; }
 
     #wrapper {
-        width: 100%;
+        border-right-width: 0px;
     }
     #sidebar {
         padding-top: 20px;
-        width: 100%;
+        left: 10px; right: 10px;
         float: none;
         position: fixed;
         z-index: 100;
+        width: 100%;
         display: none;
+        &.ready { display: block; }
+        
+        section { background-color: rgba(220, 220, 220, 1); }
+        
+        
 
-        .nav-show, .nav-hide {
-            .transition(1s linear all);
+        &.nav-show, &.nav-hide {
+            .transition(0.5s linear all);
         }
 
-        .nav-show { opacity: 0;}
-        .nav-show.nav-show-active { opacity: 1;}
-        .nav-hide { opacity: 1;}
-        .nav-hide.nav-hide-active { opacity: 0;}
+        &.nav-show { opacity: 0;}
+        &.nav-show.nav-show-active { opacity: 1;}
+        &.nav-hide { opacity: 1;}
+        &.nav-hide.nav-hide-active { opacity: 0;}
 
         section {
             position: static;

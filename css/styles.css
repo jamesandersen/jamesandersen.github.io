@@ -142,7 +142,7 @@ header nav .contents {
 }
 #sidebar {
   padding-top: 20px;
-  width: 19.3%;
+  width: 180px;
   float: right;
   font-size: 12px;
   position: relative;
@@ -234,7 +234,12 @@ header nav .contents {
   -webkit-transform: rotateY(-180deg);
 }
 #wrapper {
-  width: 80%;
+  width: 100%;
+  border-right: 190px solid transparent;
+  border-bottom: 20px solid transparent;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 #wrapper .post {
   background-color: rgba(230, 230, 230, 0.8);
@@ -465,33 +470,41 @@ textarea[contenteditable] {
     display: inline-block;
   }
   #wrapper {
-    width: 100%;
+    border-right-width: 0px;
   }
   #sidebar {
     padding-top: 20px;
-    width: 100%;
+    left: 10px;
+    right: 10px;
     float: none;
     position: fixed;
     z-index: 100;
+    width: 100%;
     display: none;
   }
-  #sidebar .nav-show,
-  #sidebar .nav-hide {
-    -webkit-transition: 1s linear all;
-    -moz-transition: 1s linear all;
-    -o-transition: 1s linear all;
-    transition: 1s linear all;
+  #sidebar.ready {
+    display: block;
   }
-  #sidebar .nav-show {
+  #sidebar section {
+    background-color: #dcdcdc;
+  }
+  #sidebar.nav-show,
+  #sidebar.nav-hide {
+    -webkit-transition: 0.5s linear all;
+    -moz-transition: 0.5s linear all;
+    -o-transition: 0.5s linear all;
+    transition: 0.5s linear all;
+  }
+  #sidebar.nav-show {
     opacity: 0;
   }
-  #sidebar .nav-show.nav-show-active {
+  #sidebar.nav-show.nav-show-active {
     opacity: 1;
   }
-  #sidebar .nav-hide {
+  #sidebar.nav-hide {
     opacity: 1;
   }
-  #sidebar .nav-hide.nav-hide-active {
+  #sidebar.nav-hide.nav-hide-active {
     opacity: 0;
   }
   #sidebar section {
