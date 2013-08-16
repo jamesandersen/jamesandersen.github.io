@@ -481,6 +481,10 @@ textarea[contenteditable] {
     z-index: 100;
     width: 100%;
     display: none;
+    opacity: 0;
+  }
+  #sidebar.open {
+    opacity: 1;
   }
   #sidebar.ready {
     display: block;

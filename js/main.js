@@ -16,11 +16,20 @@
           
           
       });
-
-    angular.module('jander').factory('navigation', ['$log', function($log) {
+    
+    // define constant values to be used across controller, services, etc.
+    angular.module('jander').constant('CONSTANTS', {
+        EVENTS: {
+            NAV_DOCK_STATE_CHANGE: 'NAV_DOCK_STATE_CHANGE'
+        },
+        NAV_STATES: { DOCKED: 'DOCKED', MENU: 'MENU' }
+    });
+    
+    angular.module('jander').factory('navigation', ['$log', '$rootScope', 'CONSTANTS', function($log, $rootScope, CONSTANTS) {
         var navService = {};
-        var navStates = { DOCKED: 'DOCKED', MENU: 'MENU' };
-        var state = navStates.MENU, menuOpen = false;
+        var state = CONSTANTS.NAV_STATES.DOCKED, menuOpen = false;
+
+        function fireDockStateChanged() { $rootScope.$broadcast(CONSTANTS.EVENTS.NAV_DOCK_STATE_CHANGE, state); }
 
         enquire.register("screen and (max-width: 700px)", {
             setup: function () {
@@ -28,19 +37,21 @@
                 $log.log('enquire loaded!');
             },
             match: function () {
-                state = navStates.MENU;
+                state = CONSTANTS.NAV_STATES.MENU;
                 $log.log('700px or less');
+                fireDockStateChanged();
             },
             unmatch: function () {
-                state = navStates.DOCKED;
+                state = CONSTANTS.NAV_STATES.DOCKED;
                 $log.log('more than 700px');
+                fireDockStateChanged();
             }
         });
 
         //navService.docked = function () { return state === navStates.DOCKED; };
-        navService.toggleNavMenu = function () { if (state === navStates.MENU) menuOpen = !menuOpen; };
+        navService.toggleNavMenu = function () { if (state === CONSTANTS.NAV_STATES.MENU) menuOpen = !menuOpen; };
         navService.navOpen = function () { return menuOpen; };
-        navService.docked = function () { return state === navStates.DOCKED; };
+        navService.docked = function () { return state === CONSTANTS.NAV_STATES.DOCKED; };
 
         return navService;
     }]);
@@ -49,17 +60,22 @@
         $scope.toggleNav = navigation.toggleNavMenu;
     }]);
 
-    angular.module('jander').controller('SidebarCtrl', ['$scope', 'navigation', function ($scope, navigation) {
+    angular.module('jander').controller('SidebarCtrl', ['$scope', '$timeout', 'CONSTANTS', 'navigation', function ($scope, $timeout, CONSTANTS, navigation) {
         $scope.navOpen = false, $scope.docked = true;
+        $scope.docked = navigation.docked();
+        var deregisterDockStateChangeHandler = $scope.$on(CONSTANTS.EVENTS.NAV_DOCK_STATE_CHANGE, function(eventName, eventArgs) {
+            $scope.$apply(function() { $scope.docked = eventArgs === CONSTANTS.NAV_STATES.DOCKED; });
+        });
+        
         var unwatchNav = $scope.$watch(navigation.navOpen, function (newVal, oldVal) {
             $scope.navOpen = newVal;
             //$scope.$digest();
         });
         
-        var unwatchDocked = $scope.$watch(navigation.docked, function (newVal, oldVal) {
-            $scope.docked = newVal;
-            //$scope.$digest();
-        }, true);
+        //var unwatchDocked = $scope.$watch(navigation.docked, function (newVal, oldVal) {
+        //    $scope.docked = newVal;
+        //    //$scope.$digest();
+        //}, true);
     }]);
 
     angular.element(document).ready(function () {

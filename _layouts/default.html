@@ -27,7 +27,11 @@
     </head>
 	<body>
 	    <div id="main-content">
-	        <div id="sidebar" data-ng-controller="SidebarCtrl" data-ng-class="{ready: initialized}" data-ng-init="initialized = true; sidebar = 'archive'" data-ng-show="docked || navOpen" data-ng-animate="{ show: 'nav-show', hide: 'nav-hide'}">
+	        <div id="sidebar" data-ng-controller="SidebarCtrl" 
+                data-ng-class="{ready: initialized, docked: docked, open: navOpen}" 
+	            data-ng-init="initialized = true; sidebar = 'archive'" 
+	            data-ng-show="docked || navOpen" 
+                data-ng-animate="{ show: 'nav-show', hide: 'nav-hide'}">
 	            <div class="tabs">
 	                <span data-ng-click="sidebar = 'archive'">Archive</span>&nbsp;|&nbsp;
                     <span data-ng-click="sidebar = 'categories'">Categories</span>

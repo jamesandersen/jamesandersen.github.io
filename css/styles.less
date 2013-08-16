@@ -459,6 +459,8 @@ textarea[contenteditable] {
         z-index: 100;
         width: 100%;
         display: none;
+        opacity: 0;
+        &.open { opacity: 1; }
         &.ready { display: block; }
         
         section { background-color: rgba(220, 220, 220, 1); }
