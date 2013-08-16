@@ -10,13 +10,13 @@ categories:
 - javascript
 ---
 
+{% highlight javascript %}
 
     /**********************************
     **  Functions to sort children of DOM nodes
-    **  written by James Andersen
-    **  2-25-05
+    **  James Andersen 2-25-05
     **  No license, if you'd like to mention me, that'd be great
-    **  jandersen.org
+    **  http://jander.me
     **********************************/
     
     function sortChildren(el){
@@ -121,3 +121,4 @@ categories:
     {
        return str.replace(/^s*|s*$/g,"");
     }
+{% endhighlight %}
