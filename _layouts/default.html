@@ -28,10 +28,8 @@
 	<body>
 	    <div id="main-content">
 	        <div id="sidebar" data-ng-controller="SidebarCtrl" 
-                data-ng-class="{ready: initialized, docked: docked, open: navOpen}" 
-	            data-ng-init="initialized = true; sidebar = 'archive'" 
-	            data-ng-show="docked || navOpen" 
-                data-ng-animate="{ show: 'nav-show', hide: 'nav-hide'}">
+                data-ng-class="{ready: initialized}" 
+	            data-ng-init="initialized = true; sidebar = 'archive'" >
 	            <div class="tabs">
 	                <span data-ng-click="sidebar = 'archive'">Archive</span>&nbsp;|&nbsp;
                     <span data-ng-click="sidebar = 'categories'">Categories</span>
@@ -91,8 +89,9 @@
                     nope: "/js/vendor/media.match.min.js"
                 },
                 "//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js",
-                "//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js",
-                "//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-mobile.min.js",
+                "/js/vendor/angular-1.2.0rc1/angular.js",
+                "/js/vendor/angular-1.2.0rc1/angular-animate.js",
+                "/js/vendor/angular-1.2.0rc1/angular-touch.min.js",
                 //and then load enquire
                 "/js/vendor/enquire.min.js",
                 "/js/helper.js",
