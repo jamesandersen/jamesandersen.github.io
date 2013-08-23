@@ -1,12 +1,13 @@
 {
-  "name": "jander.me",
-  "version": "0.0.1",
-  "dependencies": {
-    "jquery": "~2.0.0"
-  },
-  "ignore": [
+    "name": "jander.me",
+    "version": "0.0.1",
+    "dependencies": {
+        "jquery": "~2.0.0",
+        "font-awesome": "~3.0.0"
+    },
+    "ignore": [
     "**/.*",
     "node_modules",
     "components"
-  ]
+    ]
 }

@@ -11,7 +11,7 @@ module.exports = function (grunt) {
                     yuicompress: false
                 },
                 files: {
-                    "css/styles.min.css": "_assets/_less/styles.less"
+                    "assets/css/styles.min.css": "_assets/_less/styles.less"
                 }
             }
         },
@@ -24,29 +24,35 @@ module.exports = function (grunt) {
         },
         watch: {
             gruntfile: {
-                files: 'Gruntfile.js',
+                files: ['Gruntfile.js', '_config.yml'],
                 tasks: ['concurrent:compile', 'exec:build']
             },
             src: {
-                files: ['js/*.js', '_assets/_less/*.less', '_includes/*.html', '_layouts/*.html', '!lib/dontwatch.js'],
+                files: ['js/*.js', '_assets/_less/*.less', '_includes/*.html', '_layouts/*.html', '_posts/*.markdown', '!lib/dontwatch.js'],
                 tasks: ['concurrent:compile', 'exec:build'],
                 options: {
                     livereload: true
                 }
             }
         },
-        /*copy: {
-            bootstrap: {
+        copy: {
+            fontawesome: {
                 files: [
                     {
                         expand: true,
-                        cwd: 'components/bootstrap/img/',
+                        cwd: 'bower_components/font-awesome/font/',
                         src: ['**'],
-                        dest: 'assets/img/'
+                        dest: 'assets/font/'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/font-awesome/less/',
+                        src: ['font-awesome.less'],
+                        dest: '_assets/_less/'
                     }
                 ]
             }
-        },*/
+        },
         concurrent: {
             jekyll: {
                 tasks: ['exec:serve', 'watch'],
@@ -55,7 +61,7 @@ module.exports = function (grunt) {
                 }
             },
             compile: {
-                tasks: ['less', 'uglify'],
+                tasks: ['copy:fontawesome', 'less', 'uglify'],
                 options: {
                     logConcurrentOutput: true
                 }
@@ -81,8 +87,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-exec');
 
-    grunt.registerTask('default', ['less', 'uglify', 'exec:build']);
+    grunt.registerTask('default', ['copy:fontawesome', 'less', 'uglify', 'exec:build']);
     grunt.registerTask('serve', ['concurrent:jekyll']);
     grunt.registerTask('deploy', ['default', 'exec:deploy']);
-
 };
