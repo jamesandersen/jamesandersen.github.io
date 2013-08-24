@@ -29,11 +29,9 @@
 	<body>
 	    <div id="main-content">
 	        <div id="sidebar" data-ng-controller="SidebarCtrl" 
-                data-ng-class="{ready: initialized}" 
-	            data-ng-init="initialized = true; sidebar = 'archive'" >
+                data-ng-init="initialized = true; sidebar = 'archive'" >
 	            <div class="tabs">
-	                <span data-ng-click="sidebar = 'archive'">Archive</span>&nbsp;|&nbsp;
-                    <span data-ng-click="sidebar = 'categories'">Categories</span>
+	                <span data-ng-click="sidebar = 'archive'" data-ng-class="{selected: sidebar == 'archive'}">Archive</span>&nbsp;|&nbsp;<span data-ng-click="sidebar = 'categories'" data-ng-class="{selected: sidebar == 'categories'}">Categories</span>
 	            </div>
 	            <section class="archive" data-ng-show="sidebar == 'archive'" data-ng-animate="{ show: 'sidebar-show', hide: 'sidebar-hide'}">
 	                <h3>This year's posts</h3>

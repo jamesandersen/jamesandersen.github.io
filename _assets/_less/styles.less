@@ -146,18 +146,31 @@ header {
 
 #sidebar {
     padding-top: 20px;
-    width: 180px;
+    width: 190px;
     float: right; // todo
     font-size: 12px;
     position: relative;
 
     .tabs {
+        text-align: center;
+        margin-bottom: 10px;
         
-        font-size: 14px;
-        span:hover {
-            font-weight: bold;
+        span {
+            font-size: 14px;
+            padding: 2px 5px;
+            .border-radius(5px);
+            display: inline-block;
+            cursor: pointer;
+            text-transform: uppercase;
+            &.selected, &:hover {
+                background-color: @blueDark;
+                color: white;
+            }
+            
+            &:hover {
+                background-color: fade(@blueDark, 45%);
+            }    
         }
-        cursor: pointer;
     }
 
     section {
@@ -237,10 +250,11 @@ header {
 
         .post-title {
             font-size: 40px;
+            color: @blueDark;
             text-decoration: none;
-            &:visited { color: @textColor; }
-            -webkit-text-stroke: 0.25px;
-            font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+            &:visited { color: @blueDark; }
+            font-family: @sansFontFamily;
+            .text-shadow(@blueLight 0 -2px);
         }
 
         .date-block {
@@ -471,7 +485,6 @@ textarea[contenteditable] {
         width: 96%;
         margin-left: -48%;
         display: none;
-        opacity: 0;
         height: 95%;
         overflow: auto;
         padding-top: 0px;
@@ -483,21 +496,19 @@ textarea[contenteditable] {
         color: @grayLighter;
         background-color: @grayDarker;
         
-        &.open { opacity: 1; }
-        &.ready { display: block; }
+        &.open { opacity: 1; display: block; }
         
         section { background-color: transparent; }
         
-        
-
-        &.open-add, &.open-remove {
-            .transition(0.5s linear all);
+        &.open-add, &.open-remove, &[class*="-add"] {
+            .transition(0.5s ease-in-out all);
+            display: block;
         }
 
-        &.open-add { opacity: 0;}
-        &.open-add.open-add-active { opacity: 1;}
-        &.open-remove { opacity: 1;}
-        &.open-remove.open-remove-active { opacity: 0;}
+        &.open-add { opacity: 0; .translate(0px, -200px); }
+        &.open-add.open-add-active { opacity: 1; .translate(0px, 0px); }
+        &.open-remove { opacity: 1;  .translate(0px, 0px);}
+        &.open-remove.open-remove-active { opacity: 0; .translate(0px, -1000px);}
 
         section {
             position: static;

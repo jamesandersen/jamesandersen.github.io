@@ -1166,9 +1166,9 @@ header #avatar {
   background: url('http://www.gravatar.com/avatar/f93bdcfc26f373f4f6dc0834d951f5cd?s=37');
   width: 35px;
   height: 35px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
 }
 header nav {
   display: inline-block;
@@ -1196,17 +1196,32 @@ header nav .contents {
 }
 #sidebar {
   padding-top: 20px;
-  width: 180px;
+  width: 190px;
   float: right;
   font-size: 12px;
   position: relative;
 }
 #sidebar .tabs {
+  text-align: center;
+  margin-bottom: 10px;
+}
+#sidebar .tabs span {
   font-size: 14px;
+  padding: 2px 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  display: inline-block;
   cursor: pointer;
+  text-transform: uppercase;
+}
+#sidebar .tabs span.selected,
+#sidebar .tabs span:hover {
+  background-color: #003261;
+  color: white;
 }
 #sidebar .tabs span:hover {
-  font-weight: bold;
+  background-color: rgba(0, 50, 97, 0.45);
 }
 #sidebar section {
   position: absolute;
@@ -1315,12 +1330,14 @@ header nav .contents {
 }
 #wrapper .post .post-title {
   font-size: 40px;
+  color: #003261;
   text-decoration: none;
-  -webkit-text-stroke: 0.25px;
-  font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+  font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+  -moz-text-shadow: #ccccee 0 -2px;
+  text-shadow: #ccccee 0 -2px;
 }
 #wrapper .post .post-title:visited {
-  color: #333333;
+  color: #003261;
 }
 #wrapper .post .date-block {
   position: absolute;
@@ -1534,7 +1551,6 @@ textarea[contenteditable] {
     width: 96%;
     margin-left: -48%;
     display: none;
-    opacity: 0;
     height: 95%;
     overflow: auto;
     padding-top: 0px;
@@ -1546,31 +1562,51 @@ textarea[contenteditable] {
   }
   #sidebar.open {
     opacity: 1;
-  }
-  #sidebar.ready {
     display: block;
   }
   #sidebar section {
     background-color: transparent;
   }
   #sidebar.open-add,
-  #sidebar.open-remove {
-    -webkit-transition: 0.5s linear all;
-    -moz-transition: 0.5s linear all;
-    -o-transition: 0.5s linear all;
-    transition: 0.5s linear all;
+  #sidebar.open-remove,
+  #sidebar[class*="-add"] {
+    -webkit-transition: 0.5s ease-in-out all;
+    -moz-transition: 0.5s ease-in-out all;
+    -o-transition: 0.5s ease-in-out all;
+    transition: 0.5s ease-in-out all;
+    display: block;
   }
   #sidebar.open-add {
     opacity: 0;
+    -webkit-transform: translate(0px, -200px);
+    -moz-transform: translate(0px, -200px);
+    -ms-transform: translate(0px, -200px);
+    -o-transform: translate(0px, -200px);
+    transform: translate(0px, -200px);
   }
   #sidebar.open-add.open-add-active {
     opacity: 1;
+    -webkit-transform: translate(0px, 0px);
+    -moz-transform: translate(0px, 0px);
+    -ms-transform: translate(0px, 0px);
+    -o-transform: translate(0px, 0px);
+    transform: translate(0px, 0px);
   }
   #sidebar.open-remove {
     opacity: 1;
+    -webkit-transform: translate(0px, 0px);
+    -moz-transform: translate(0px, 0px);
+    -ms-transform: translate(0px, 0px);
+    -o-transform: translate(0px, 0px);
+    transform: translate(0px, 0px);
   }
   #sidebar.open-remove.open-remove-active {
     opacity: 0;
+    -webkit-transform: translate(0px, -1000px);
+    -moz-transform: translate(0px, -1000px);
+    -ms-transform: translate(0px, -1000px);
+    -o-transform: translate(0px, -1000px);
+    transform: translate(0px, -1000px);
   }
   #sidebar section {
     position: static;
