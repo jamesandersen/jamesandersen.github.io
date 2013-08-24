@@ -1556,6 +1556,15 @@ textarea[contenteditable] {
     padding-top: 0px;
     box-sizing: border-box;
     border-top: solid transparent 50px;
+    -webkit-border-bottom-right-radius: 6px;
+    -moz-border-radius-bottomright: 6px;
+    border-bottom-right-radius: 6px;
+    -webkit-border-bottom-left-radius: 6px;
+    -moz-border-radius-bottomleft: 6px;
+    border-bottom-left-radius: 6px;
+    -webkit-box-shadow: 1px 3px 10px rgba(30, 30, 50, 0.79);
+    -moz-box-shadow: 1px 3px 10px rgba(30, 30, 50, 0.79);
+    box-shadow: 1px 3px 10px rgba(30, 30, 50, 0.79);
     top: 0px;
     color: #eeeeee;
     background-color: #222222;
@@ -1566,6 +1575,19 @@ textarea[contenteditable] {
   }
   #sidebar section {
     background-color: transparent;
+  }
+  #sidebar section h3 {
+    text-align: left;
+  }
+  #sidebar section ul li {
+    color: #999999;
+    font-size: 14px;
+  }
+  #sidebar section ul li:hover,
+  #sidebar section ul li:focus {
+    margin-left: -5px;
+    margin-right: 10px;
+    color: #eeeeee;
   }
   #sidebar.open-add,
   #sidebar.open-remove,
@@ -1608,50 +1630,30 @@ textarea[contenteditable] {
     -o-transform: translate(0px, -1000px);
     transform: translate(0px, -1000px);
   }
-  #sidebar section {
-    position: static;
+  #sidebar .tabs span {
+    -webkit-transition: 0.35s ease-in background-color;
+    -moz-transition: 0.35s ease-in background-color;
+    -o-transition: 0.35s ease-in background-color;
+    transition: 0.35s ease-in background-color;
+    color: #222222;
+    background-color: #555555;
+    font-size: 18px;
   }
-  #sidebar section ul {
-    padding-left: 5px;
+  #sidebar .tabs span.selected,
+  #sidebar .tabs span:hover {
+    background-color: #eeeeee;
+    color: #222222;
   }
-  #sidebar section ul li {
-    -webkit-transition: 0.3s linear all;
-    -moz-transition: 0.3s linear all;
-    -o-transition: 0.3s linear all;
-    transition: 0.3s linear all;
-    margin-left: 5px;
-    color: #555555;
-    list-style: inside none;
-    margin-bottom: 4px;
+  #sidebar .tabs span:not(.selected):hover {
+    background-color: rgba(238, 238, 238, 0.75);
   }
-  #sidebar section ul li:hover,
-  #sidebar section ul li:focus {
-    margin-left: -5px;
-    margin-right: 10px;
-    color: #003261;
-  }
-  #sidebar section ul li a,
-  #sidebar section ul li a:visited {
-    color: inherit;
-    text-decoration: none;
-  }
-  #sidebar section ul li a:hover {
-    text-decoration: underline;
-  }
-  #sidebar section ul li time {
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-  #sidebar section ul li time:after {
-    content: '  ';
-  }
-  #sidebar section.archive ul li {
+  #sidebar.archive ul li {
     padding-left: 45px;
   }
-  #sidebar section.archive ul li:first-letter {
+  #sidebar.archive ul li:first-letter {
     margin-left: -45px;
   }
-  #sidebar section.categories ul li:first-letter {
+  #sidebar.categories ul li:first-letter {
     font-weight: bold;
   }
 }
