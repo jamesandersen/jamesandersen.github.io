@@ -204,13 +204,14 @@ header {
             }
         }
 
-        &.archive ul {
+        /*
+        &.archive div ul {
             @indent: 45px;
              li{ 
                 padding-left: @indent;
                 &:first-letter { margin-left: -@indent; }
              }
-        }
+        } */
 
         &.categories ul li:first-letter { font-weight: bold; }
     }
@@ -486,7 +487,6 @@ textarea[contenteditable] {
         margin-left: -48%;
         display: none;
         height: 95%;
-        overflow: auto;
         padding-top: 0px;
         top: 0px;
         box-sizing: border-box;
@@ -500,28 +500,13 @@ textarea[contenteditable] {
         
         &.open { opacity: 1; display: block; }
         
-        section { 
-            background-color: transparent; 
-            h3 { text-align: left; }
-            ul li {
-                color: @grayLight;
-                font-size: @baseFontSize;
-                &:hover, &:focus { margin-left: -5px; margin-right: 10px; color: @grayLighter; }
-            }
-        }
-        
-        &.open-add, &.open-remove, &[class*="-add"] {
-            .transition(0.5s ease-in-out all);
-            display: block;
-        }
-
-        &.open-add { opacity: 0; .translate(0px, -200px); }
-        &.open-add.open-add-active { opacity: 1; .translate(0px, 0px); }
-        &.open-remove { opacity: 1;  .translate(0px, 0px);}
-        &.open-remove.open-remove-active { opacity: 0; .translate(0px, -1000px);}
-
         // change colors for tabs on the dark background menu
         .tabs {
+            
+            position: absolute;
+            left: 0;
+            right: 0;
+            z-index: 10;
             span {
                 .transition(0.35s ease-in background-color);
                 color: @grayDarker;
@@ -537,6 +522,41 @@ textarea[contenteditable] {
                 }    
             }
         }
+        
+        section { 
+            background-color: transparent; 
+            padding-top: 35px;
+            padding-bottom: 5px;
+            box-sizing: border-box;
+            position: absolute;
+            height: 100%;
+            z-index: -1;
+            
+            & > div {
+                overflow: auto;
+                height: 100%;
+                
+                h3 { text-align: left; }
+                
+                ul li {
+                    color: @grayLight;
+                    font-size: @baseFontSize;
+                    &:hover, &:focus { margin-left: -5px; margin-right: 10px; color: @grayLighter; }
+                }
+            }
+        }
+        
+        &.open-add, &.open-remove, &[class*="-add"] {
+            .transition(0.5s ease-in-out all);
+            display: block;
+        }
+
+        &.open-add { opacity: 0; .translate(0px, -200px); }
+        &.open-add.open-add-active { opacity: 1; .translate(0px, 0px); }
+        &.open-remove { opacity: 1;  .translate(0px, 0px);}
+        &.open-remove.open-remove-active { opacity: 0; .translate(0px, -1000px);}
+
+        
 
         &.archive ul {
             @indent: 45px;

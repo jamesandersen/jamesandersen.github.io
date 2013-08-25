@@ -1229,6 +1229,15 @@ header nav .contents {
   right: 0;
   background-color: rgba(220, 220, 220, 0.8);
   padding: 0 5px;
+  /*
+        &.archive div ul {
+            @indent: 45px;
+             li{ 
+                padding-left: @indent;
+                &:first-letter { margin-left: -@indent; }
+             }
+        } */
+
 }
 #sidebar section h3 {
   text-align: center;
@@ -1268,12 +1277,6 @@ header nav .contents {
 }
 #sidebar section ul li time:after {
   content: '  ';
-}
-#sidebar section.archive ul li {
-  padding-left: 45px;
-}
-#sidebar section.archive ul li:first-letter {
-  margin-left: -45px;
 }
 #sidebar section.categories ul li:first-letter {
   font-weight: bold;
@@ -1552,7 +1555,6 @@ textarea[contenteditable] {
     margin-left: -48%;
     display: none;
     height: 95%;
-    overflow: auto;
     padding-top: 0px;
     box-sizing: border-box;
     border-top: solid transparent 50px;
@@ -1573,18 +1575,51 @@ textarea[contenteditable] {
     opacity: 1;
     display: block;
   }
+  #sidebar .tabs {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+  #sidebar .tabs span {
+    -webkit-transition: 0.35s ease-in background-color;
+    -moz-transition: 0.35s ease-in background-color;
+    -o-transition: 0.35s ease-in background-color;
+    transition: 0.35s ease-in background-color;
+    color: #222222;
+    background-color: #555555;
+    font-size: 18px;
+  }
+  #sidebar .tabs span.selected,
+  #sidebar .tabs span:hover {
+    background-color: #eeeeee;
+    color: #222222;
+  }
+  #sidebar .tabs span:not(.selected):hover {
+    background-color: rgba(238, 238, 238, 0.75);
+  }
   #sidebar section {
     background-color: transparent;
+    padding-top: 35px;
+    padding-bottom: 5px;
+    box-sizing: border-box;
+    position: absolute;
+    height: 100%;
+    z-index: -1;
   }
-  #sidebar section h3 {
+  #sidebar section > div {
+    overflow: auto;
+    height: 100%;
+  }
+  #sidebar section > div h3 {
     text-align: left;
   }
-  #sidebar section ul li {
+  #sidebar section > div ul li {
     color: #999999;
     font-size: 14px;
   }
-  #sidebar section ul li:hover,
-  #sidebar section ul li:focus {
+  #sidebar section > div ul li:hover,
+  #sidebar section > div ul li:focus {
     margin-left: -5px;
     margin-right: 10px;
     color: #eeeeee;
@@ -1629,23 +1664,6 @@ textarea[contenteditable] {
     -ms-transform: translate(0px, -1000px);
     -o-transform: translate(0px, -1000px);
     transform: translate(0px, -1000px);
-  }
-  #sidebar .tabs span {
-    -webkit-transition: 0.35s ease-in background-color;
-    -moz-transition: 0.35s ease-in background-color;
-    -o-transition: 0.35s ease-in background-color;
-    transition: 0.35s ease-in background-color;
-    color: #222222;
-    background-color: #555555;
-    font-size: 18px;
-  }
-  #sidebar .tabs span.selected,
-  #sidebar .tabs span:hover {
-    background-color: #eeeeee;
-    color: #222222;
-  }
-  #sidebar .tabs span:not(.selected):hover {
-    background-color: rgba(238, 238, 238, 0.75);
   }
   #sidebar.archive ul li {
     padding-left: 45px;
