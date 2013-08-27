@@ -1,6 +1,6 @@
 (function (angular, enquire) {
     "use strict";
-    angular.module('jander', ['ngAnimate', 'ngTouch']).
+    angular.module('jander', ['ngAnimate', 'ngTouch', 'ngSanitize']).
     /*config(function ($routeProvider) { // provider-injector
         // This is an example of config block.
         // You can have as many of these as you want.
@@ -67,6 +67,18 @@
             return navService;
     }]);
 
+    angular.module('jander').controller('GitHubCtrl', ['$scope', '$http', function ($scope, $http) {
+        $scope.feed = [];
+        
+        $http.jsonp('https://github.com/jamesandersen.json?callback=JSON_CALLBACK').success(function(data, status, headers, config) {
+            angular.forEach(data, function(item) {
+                $scope.feed.push('<a href="' + item.url + '" target="_blank">' +
+                                 (item.type == "PushEvent" && item.payload && item.payload.shas ? item.payload.shas[0][2] : 'activity')
+                                 + '</a>');
+            });
+          });
+    }]);
+    
     angular.module('jander').controller('HeaderCtrl', ['$scope', 'navigation', function ($scope, navigation) {
             $scope.toggleNav = navigation.toggleNavMenu;
     }]);

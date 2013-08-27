@@ -7,7 +7,7 @@ module.exports = function (grunt) {
         less: {
             production: {
                 options: {
-                    paths: ["_assets/_less"],
+                    paths: ["_assets/_less", "bower-components/font-awesome/css/"],
                     yuicompress: false
                 },
                 files: {
@@ -28,7 +28,7 @@ module.exports = function (grunt) {
                 tasks: ['concurrent:compile', 'exec:build']
             },
             src: {
-                files: ['js/*.js', '_assets/_less/*.less', '_includes/*.html', '_layouts/*.html', '_posts/*.markdown', '!lib/dontwatch.js'],
+                files: ['js/*.js', '_assets/_less/*.less', '_includes/*.html', '_layouts/*.html', '_posts/*.markdown', 'about/*.html', '!lib/dontwatch.js'],
                 tasks: ['concurrent:compile', 'exec:build'],
                 options: {
                     livereload: true
@@ -47,8 +47,8 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         cwd: 'bower_components/font-awesome/less/',
-                        src: ['font-awesome.less'],
-                        dest: '_assets/_less/'
+                        src: ['*.less'],
+                        dest: '_assets/_less/font-awesome/'
                     }
                 ]
             }
