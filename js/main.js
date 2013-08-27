@@ -28,53 +28,92 @@
     });
 
     angular.module('jander').factory('navigation', ['$log', '$rootScope', 'CONSTANTS', function ($log, $rootScope, CONSTANTS) {
-            var navService = {};
-            var state = CONSTANTS.NAV_STATES.DOCKED,
-                menuOpen = false;
+        var navService = {},
+            state = CONSTANTS.NAV_STATES.DOCKED,
+            menuOpen = false;
 
-            function fireDockStateChanged() {
-                $rootScope.$broadcast(CONSTANTS.EVENTS.NAV_DOCK_STATE_CHANGE, state);
+        function fireDockStateChanged() {
+            $rootScope.$broadcast(CONSTANTS.EVENTS.NAV_DOCK_STATE_CHANGE, state);
+        }
+
+        enquire.register("screen and (max-width: 700px)", {
+            setup: function () {
+                // Load in content via AJAX (just the once)
+                $log.log('enquire loaded!');
+            },
+            match: function () {
+                state = CONSTANTS.NAV_STATES.MENU;
+                $log.log('700px or less');
+                fireDockStateChanged();
+            },
+            unmatch: function () {
+                state = CONSTANTS.NAV_STATES.DOCKED;
+                $log.log('more than 700px');
+                fireDockStateChanged();
             }
+        });
 
-            enquire.register("screen and (max-width: 700px)", {
-                setup: function () {
-                    // Load in content via AJAX (just the once)
-                    $log.log('enquire loaded!');
-                },
-                match: function () {
-                    state = CONSTANTS.NAV_STATES.MENU;
-                    $log.log('700px or less');
-                    fireDockStateChanged();
-                },
-                unmatch: function () {
-                    state = CONSTANTS.NAV_STATES.DOCKED;
-                    $log.log('more than 700px');
-                    fireDockStateChanged();
-                }
-            });
+        //navService.docked = function () { return state === navStates.DOCKED; };
+        navService.toggleNavMenu = function (force) {
+            if (state === CONSTANTS.NAV_STATES.MENU || force) { menuOpen = !menuOpen; }
+        };
+        navService.navOpen = function () {
+            return menuOpen;
+        };
+        navService.docked = function () {
+            return state === CONSTANTS.NAV_STATES.DOCKED;
+        };
 
-            //navService.docked = function () { return state === navStates.DOCKED; };
-            navService.toggleNavMenu = function (force) {
-                if (state === CONSTANTS.NAV_STATES.MENU || force) menuOpen = !menuOpen;
-            };
-            navService.navOpen = function () {
-                return menuOpen;
-            };
-            navService.docked = function () {
-                return state === CONSTANTS.NAV_STATES.DOCKED;
-            };
-
-            return navService;
+        return navService;
     }]);
 
     angular.module('jander').controller('GitHubCtrl', ['$scope', '$http', function ($scope, $http) {
         $scope.feed = [];
         
-        $http.jsonp('https://github.com/jamesandersen.json?callback=JSON_CALLBACK').success(function(data, status, headers, config) {
+        $http.jsonp('https://github.com/jamesandersen.json?callback=JSON_CALLBACK').success(function (data, status, headers, config) {
+            function getRepositoryLink(item) {
+                return '<a href="' + item.repository.url + '" target="_blank">' + item.repository.name + '</a>';
+            }
+            
+            function getCommitLink(item) {
+                return '<a href="' + item.url + '" target="_blank">' + item.payload.shas[0][2] + '</a>';
+            }
+            
+            function getCommentLink(item) {
+                return '<a href="' + item.url + '" target="_blank">comment</a>';
+            }
+            
+            function getDescription(item) {
+                switch (item.type) {
+                case 'PushEvent': return 'commit to ' + getRepositoryLink(item) + ': ' + getCommitLink(item);
+                case 'CreateEvent': 
+                    if (item.payload.ref_type === 'repository')
+                        return 'created ' + getRepositoryLink(item);
+                    else
+                        return 'created ' + item.payload.ref + ' ' + item.payload.ref_type + ' of ' + getRepositoryLink(item);
+                case 'IssueCommentEvent': return getCommentLink(item) + ' on ' + getRepositoryLink(item);
+                default: return 'Other';
+                }
+            }
+            
+            function getIcon(item) {
+                switch(item.type) {
+                    case 'PushEvent': return 'icon-arrow-up';
+                    case 'CreateEvent': return item.payload.ref_type == 'repository' ? 'icon-plus-sign' : 'icon-code-fork';
+                    case 'IssueCommentEvent': return 'icon-comment';
+                    default: return 'icon-rss';
+                }
+            }
+            
             angular.forEach(data, function(item) {
-                $scope.feed.push('<a href="' + item.url + '" target="_blank">' +
-                                 (item.type == "PushEvent" && item.payload && item.payload.shas ? item.payload.shas[0][2] : 'activity')
-                                 + '</a>');
+                var activity = {
+                    date : new Date(item.created_at),
+                    type : item.type,
+                    description : getDescription(item),
+                    icon: getIcon(item)
+                };
+                
+                $scope.feed.push(activity);
             });
           });
     }]);

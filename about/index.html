@@ -14,7 +14,13 @@ title: About | James Andersen
     <div class="panel">
         <h2><i class="icon-github icon-2x"></i>GitHub</h2>
         <div data-ng-controller="GitHubCtrl">
-            <div data-ng-repeat="item in feed" data-ng-bind-html="item"></div>
+            <ul>
+                <li data-ng-repeat="item in feed">
+                    <span data-ng-class="item.icon"></span>
+                    <span data-ng-bind="item.date | date:short"></span>
+                    <span data-ng-bind-html="item.description"></span>
+                </li>
+            </ul>Í
         </div>
     </div>
     <div class="panel">
