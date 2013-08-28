@@ -29,21 +29,23 @@ textarea {
 }
 
 html, body {
-    font-size: 1em;
+    font-size: @baseFontSize;
     line-height: 1.4;
     height: 100%;
 }
 
 a {
-    color: #00e;
+    color: @linkColor;
+    text-decoration: none;
 }
 
 a:visited {
-    color: #551a8b;
+    color: @linkColor;
 }
 
 a:hover {
-    color: #06e;
+    color: @blue;
+    text-decoration: underline;
 }
 
 /*
@@ -241,17 +243,23 @@ header {
     //margin: 0px auto;
 
     @date-size: 100px;
-    .post {
+    
+    .post, .page {
         background-color: rgba(230, 230, 230, 0.8);
+        margin: @headerHeight 20px 0px 20px;
+        .box-shadow(1px 3px 16px rgba(50, 50, 50, 0.59));
+    }
+    
+    .post {
         min-height: 200px;
         padding: 10px 20px 10px @date-size + 20px;
         
-        margin: 20px 20px 0px 20px;
+        
         .border-bottom-radius(5px);
         border: 0px solid green;
         border-top-width: 3px;
         //border-left-width: 2px;
-        .box-shadow(1px 3px 16px rgba(50, 50, 50, 0.59));
+        
         position: relative;
 
         .post-title {
@@ -340,16 +348,44 @@ header {
         }
     }
     
-    div.page {
-        width: 100%;
+    .page.about {
         div.panel {
+            display: inline-block;
+            vertical-align: top;
             width: 47%;
-            background-color: @grayLighter;
-            float: left;
+            //background-color: @grayLighter;
             margin-left: 2%;
             margin-bottom: 10px;
             padding: 10px;
             box-sizing: border-box;
+            
+            h2 {
+                margin-left: -10px;
+                margin-top: -10px;
+            }
+            
+            &.github {
+                ul {
+                    padding-left: 30px;
+                    li { 
+                        list-style-type: none; 
+                        padding-bottom: 8px;
+                        border-bottom: solid @grayLighter 1px;
+                        margin-bottom: 6px;
+                        .clearfix();
+                        
+                        a.repo { color: @textColor; }
+                    }
+                }
+                span[class*='icon'] { margin-left: -30px; margin-top: -5px; }
+                span.date { 
+                    float: right; 
+                    font-size: @fontSizeSmall; 
+                    color: @gray; 
+                    margin-left: 8px;
+                    
+                }
+            }
         }
     }
 }

@@ -72,26 +72,27 @@
         
         $http.jsonp('https://github.com/jamesandersen.json?callback=JSON_CALLBACK').success(function (data, status, headers, config) {
             function getRepositoryLink(item) {
-                return '<a href="' + item.repository.url + '" target="_blank">' + item.repository.name + '</a>';
+                return '<a class="repo" href="' + item.repository.url + '" target="_blank">' + item.repository.name + '</a>';
             }
             
             function getCommitLink(item) {
                 return '<a href="' + item.url + '" target="_blank">' + item.payload.shas[0][2] + '</a>';
             }
             
-            function getCommentLink(item) {
-                return '<a href="' + item.url + '" target="_blank">comment</a>';
+            function getCommentLink(item, text) {
+                return '<a href="' + item.url + '" target="_blank">' + text + '</a>';
             }
             
             function getDescription(item) {
                 switch (item.type) {
-                case 'PushEvent': return 'commit to ' + getRepositoryLink(item) + ': ' + getCommitLink(item);
+                case 'PushEvent': return getRepositoryLink(item) + ': ' + getCommitLink(item);
                 case 'CreateEvent': 
                     if (item.payload.ref_type === 'repository')
                         return 'created ' + getRepositoryLink(item);
                     else
                         return 'created ' + item.payload.ref + ' ' + item.payload.ref_type + ' of ' + getRepositoryLink(item);
-                case 'IssueCommentEvent': return getCommentLink(item) + ' on ' + getRepositoryLink(item);
+                case 'IssueCommentEvent': return getCommentLink(item, 'comment') + ' on ' + getRepositoryLink(item);
+                case 'IssuesEvent': return getCommentLink(item, 'opened #' + item.payload.number ) + ' on ' + getRepositoryLink(item);
                 default: return 'Other';
                 }
             }
@@ -100,7 +101,9 @@
                 switch(item.type) {
                     case 'PushEvent': return 'icon-arrow-up';
                     case 'CreateEvent': return item.payload.ref_type == 'repository' ? 'icon-plus-sign' : 'icon-code-fork';
-                    case 'IssueCommentEvent': return 'icon-comment';
+                    case 'IssueCommentEvent': 
+                    case 'IssuesEvent':
+                        return 'icon-comment';
                     default: return 'icon-rss';
                 }
             }
@@ -110,7 +113,7 @@
                     date : new Date(item.created_at),
                     type : item.type,
                     description : getDescription(item),
-                    icon: getIcon(item)
+                    icon: 'icon-2x pull-left ' + getIcon(item)
                 };
                 
                 $scope.feed.push(activity);
