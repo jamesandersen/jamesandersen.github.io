@@ -27,6 +27,63 @@
         }
     });
 
+    angular.module('jander').controller('StackOverflowCtrl', ['$scope', '$http', function ($scope, $http) {
+        $scope.feed = [];
+        
+        function getPostLink(item) {
+            return '<a href="http://stackoverflow.com/questions/' + item.post_id + '" target="_blank">' + item.title + '</a>';
+        }
+            
+        function getCommentLink(item) {
+            return '<a href="http://stackoverflow.com/questions/' + item.post_id + '/' + item.title + '/' + item.comment_id + '#' + item.comment_id +'" target="_blank">' + item.timeline_type + '</a>';
+        }
+        
+        function getAnswerOrCommentLink(item) {
+            if(item.timeline_type == 'commented') {
+                return getCommentLink(item) + ' on ' + getPostLink(item);
+            } else if (item.timeline_type === 'revision'){
+                return item.timeline_type + ' on ' + getPostLink(item);
+            } else {
+                return item.timeline_type + ' ' + getPostLink(item);
+            }
+        }
+        
+        function getDescription(item) {
+            switch (item.timeline_type) {
+            case 'answered': 
+            case 'commented': 
+            case 'revision': 
+                    return getAnswerOrCommentLink(item);
+            case 'badge': return 'awarded ' + item.detail + ' badge';
+            default: return 'Other';
+            }
+        }
+        
+        function getIcon(item) {
+            switch(item.timeline_type) {
+                case 'answered': return 'icon-ok';
+                case 'commented': return 'icon-comment';
+                case 'revision': return 'icon-pencil';
+                case 'badge': return 'icon-sun';
+                default: return 'icon-rss';
+            }
+        }
+        
+        $http.jsonp('https://api.stackexchange.com/2.1/users/385152/timeline?site=stackoverflow&page=1&pagesize=10&page=1&callback=JSON_CALLBACK').success(function (data, status, headers, config) {
+            
+            angular.forEach(data.items, function(item) {
+                var activity = {
+                    date : new Date(item.creation_date * 1000),
+                    type : item.timeline_type,
+                    description : getDescription(item),
+                    icon: 'icon-2x pull-left ' + getIcon(item)
+                };
+                
+                $scope.feed.push(activity);
+            });
+          });
+    }]);
+    
     angular.module('jander').factory('navigation', ['$log', '$rootScope', 'CONSTANTS', function ($log, $rootScope, CONSTANTS) {
         var navService = {},
             state = CONSTANTS.NAV_STATES.DOCKED,
@@ -70,8 +127,7 @@
     angular.module('jander').controller('GitHubCtrl', ['$scope', '$http', function ($scope, $http) {
         $scope.feed = [];
         
-        $http.jsonp('https://github.com/jamesandersen.json?callback=JSON_CALLBACK').success(function (data, status, headers, config) {
-            function getRepositoryLink(item) {
+        function getRepositoryLink(item) {
                 return '<a class="repo" href="' + item.repository.url + '" target="_blank">' + item.repository.name + '</a>';
             }
             
@@ -107,7 +163,8 @@
                     default: return 'icon-rss';
                 }
             }
-            
+        
+        $http.jsonp('https://github.com/jamesandersen.json?callback=JSON_CALLBACK').success(function (data, status, headers, config) {
             angular.forEach(data, function(item) {
                 var activity = {
                     date : new Date(item.created_at),
