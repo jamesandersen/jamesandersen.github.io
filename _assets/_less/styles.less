@@ -34,6 +34,11 @@ html, body {
     height: 100%;
 }
 
+h1, h2, h3, h4, h5 {
+    font-weight: normal;
+    margin: .3em 0 0 0;
+}
+
 a {
     color: @linkColor;
     text-decoration: none;
@@ -248,6 +253,16 @@ header {
         background-color: rgba(230, 230, 230, 0.8);
         margin: @headerHeight 20px 0px 20px;
         .box-shadow(1px 3px 16px rgba(50, 50, 50, 0.59));
+        padding: 10px;
+        
+        .post-title {
+            font-size: 40px;
+            color: @blueDark;
+            text-decoration: none;
+            &:visited { color: @blueDark; }
+            font-family: @sansFontFamily;
+            .text-shadow(@blueLight 0 -2px);
+        }
     }
     
     .post {
@@ -262,14 +277,7 @@ header {
         
         position: relative;
 
-        .post-title {
-            font-size: 40px;
-            color: @blueDark;
-            text-decoration: none;
-            &:visited { color: @blueDark; }
-            font-family: @sansFontFamily;
-            .text-shadow(@blueLight 0 -2px);
-        }
+        
 
         .date-block {
             position: absolute;
@@ -358,17 +366,26 @@ header {
             margin-bottom: 10px;
             padding: 10px;
             box-sizing: border-box;
-            max-height: 300px;
-            overflow: auto;
+            
             
             h2 {
                 margin-left: -10px;
                 margin-top: -10px;
+                i[class*='icon'] {
+                    vertical-align: middle;
+                    margin-right: 8px;   
+                }
             }
             
             &.github, &.stackoverflow {
                 ul {
-                    padding-left: 30px;
+                    padding: 5px 5px 5px 35px;
+                    max-height: 250px;
+                    overflow: auto;
+                    background-color: white;
+                    border-radius: 6px;
+                    margin: 5px 0;
+                    
                     li { 
                         list-style-type: none; 
                         padding-bottom: 8px;
@@ -384,11 +401,19 @@ header {
                     float: right; 
                     font-size: @fontSizeSmall; 
                     color: @gray; 
-                    margin-left: 8px;
+                    margin: 2px 8px;
                     
                 }
             }
+            
+            iframe[id^='twitter-widget-']{ width:100%;}
         }
+    }
+}
+
+@media only screen and (max-width: 930px) {
+    #wrapper .page.about div.panel {
+        width: 95%;
     }
 }
 
@@ -544,7 +569,7 @@ textarea[contenteditable] {
         padding-top: 0px;
         top: 0px;
         box-sizing: border-box;
-        border-top: solid transparent @headerHeight;
+        border-top: solid transparent @headerHeight + 20;
         .border-bottom-radius(6px);
         .box-shadow(1px 3px 10px rgba(30, 30, 50, 0.79));
         top: 0px;
