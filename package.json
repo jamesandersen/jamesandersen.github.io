@@ -1,0 +1,20 @@
+{
+  "name": "jander.me",
+  "version": "0.0.1",
+  "dependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-less": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-copy": "*",
+    "bower": "*",
+    "grunt-exec": "*"
+  },
+  "engines": {
+    "npm": "1.2.x"
+  },
+  "devDependencies": {
+    "grunt-contrib-watch": "~0.5.2",
+    "grunt-jekyll": "~0.3.9",
+    "grunt-concurrent": "~0.3.0"
+  }
+}

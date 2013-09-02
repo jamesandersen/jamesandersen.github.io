@@ -1,67 +1,109 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if IEMobile 7 ]>    <html class="no-js iem7"> <![endif]-->
-<!--[if (gt IEMobile 7)|!(IEMobile)]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <title>{{ page.title }}</title>
-        <meta name="description" content="">
-        <meta name="HandheldFriendly" content="True">
-        <meta name="MobileOptimized" content="320">
-        <!-- Set the viewport width to device width for mobile -->
-        <meta name="viewport" content="width=device-width" />
-        <meta http-equiv="cleartype" content="on">
-    
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/touch/apple-touch-icon-144x144-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/touch/apple-touch-icon-114x114-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/touch/apple-touch-icon-72x72-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" href="img/touch/apple-touch-icon-57x57-precomposed.png">
-        <link rel="shortcut icon" href="img/touch/apple-touch-icon.png">
+<!--[if IE 8]>
+    <html class="no-js lt-ie9" lang="en">
+    <![endif]-->
+    <!--[if IEMobile 7 ]>
+        <html class="no-js iem7">
+        <![endif]-->
+        <!--[if (gt IEMobile 7)|!(IEMobile)]>
+            <!-->
+            <html class="no-js">
+            <!--<![endif]-->
+            
+            <head>
+                <meta charset="utf-8">
+                <title>{{ page.title }}</title>
+                <meta name="description" content="">
+                <meta name="HandheldFriendly" content="True">
+                <meta name="MobileOptimized" content="320">
+                <!-- Set the viewport width to device width for mobile -->
+                <meta name="viewport" content="width=device-width" />
+                <meta http-equiv="cleartype" content="on">
+                <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/img/touch/apple-touch-icon-144x144-precomposed.png">
+                <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/touch/apple-touch-icon-114x114-precomposed.png">
+                <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/img/touch/apple-touch-icon-72x72-precomposed.png">
+                <link rel="apple-touch-icon-precomposed" href="/assets/img/touch/apple-touch-icon-57x57-precomposed.png">
+                <link rel="shortcut icon" href="/assets/img/touch/apple-touch-icon.png">
+                <!-- Tile icon for Win8 (144x144 + tile color) -->
+                <meta name="msapplication-TileImage" content="/img/touch/apple-touch-icon-144x144-precomposed.png">
+                <meta name="msapplication-TileColor" content="#222222">
+                <link rel="stylesheet" href="/assets/css/styles.min.css">
+                <script src="/js/vendor/modernizr-2.6.2.min.js"></script>
+            </head>
+            
+            <body>
+                <div id="main-content">
+                    <div id="sidebar" data-ng-controller="SidebarCtrl" data-ng-init="initialized = true; sidebar = 'archive'">
+                        <div class="tabs">
+                            <span data-ng-click="sidebar = 'archive'" data-ng-class="{selected: sidebar == 'archive'}">Archive</span>&nbsp;|&nbsp;
+                            <span data-ng-click="sidebar = 'categories'" data-ng-class="{selected: sidebar == 'categories'}">Categories</span>
+                        </div>
+                        <section class="archive" data-ng-show="sidebar == 'archive'" data-ng-animate="{ show: 'sidebar-show', hide: 'sidebar-hide'}">
+                            <div>
+                                <h3>This year's posts</h3>{%for post in site.posts %} {% unless post.next %}
+                                <ul class="this">{% else %} {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %} {% capture nyear %}{{ post.next.date | date: '%Y' }}{% endcapture %} {% if year != nyear %}</ul>
+                                <h3>{{ post.date | date: '%Y' }}</h3>
+                                <ul class="past">{% endif %} {% endunless %}
+                                    <li>
+                                        <a href="{{ post.url }}">
+                                            <time>{{ post.date | date:"%d %b" }}</time>{{ post.title }}</a>
+                                    </li>{% endfor %}</ul>
+                            </div>
+                        </section>
+                        <section class="categories" data-ng-hide="sidebar != 'categories'" data-ng-animate="{ show: 'sidebar-show', hide: 'sidebar-hide'}">
+                            <div>
+                            <!-- This loops through the site categories -->{% for category in site.categories %}
+                            <h3 id="{{ category[0] }}-ref">{{ category[0] }}</h3>
+                            <ul>{% for post in category[1] %}
+                                <li>
+                                    <a href="{{ post.url }}">{{ post.title }}</a>
+                                </li>{% endfor %}</ul>{% comment %}
+                            <p>
+                                <a href="#{{ category[0] }}-ref">&#8617;</a>
+                            </p>{% endcomment %} {% endfor %}</div></section>
+                    </div>
+                    <!-- Main page content -->
+                    <div id="wrapper">{{ content }}</div>
+                </div>{% include header.html %} {% comment %}
+                <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+                <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+                <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-mobile.min.js"></script>
+                <script src="/js/vendor/enquire.min.js"></script>
+                <script src="/js/helper.js"></script>
+                <script src="/js/main.js"></script>{% endcomment %}
+                <script>
+                    Modernizr.load([
+                        //first test need for polyfill
+                        {
+                            test: window.matchMedia,
+                            nope: "/js/vendor/media.match.min.js"
+                        },
+                            "//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js",
+                            "/js/vendor/angular-1.2.0rc1/angular.js",
+                            "/js/vendor/angular-1.2.0rc1/angular-animate.js",
+                            "/js/vendor/angular-1.2.0rc1/angular-touch.min.js",
+                            "/js/vendor/angular-1.2.0rc1/angular-sanitize.min.js",
+                        //and then load enquire
+                        "/js/vendor/enquire.min.js",
+                            "/js/helper.js",
+                            "/js/main.js"
+                    ]);
 
-        <!-- Tile icon for Win8 (144x144 + tile color) -->
-        <meta name="msapplication-TileImage" content="img/touch/apple-touch-icon-144x144-precomposed.png">
-        <meta name="msapplication-TileColor" content="#222222">
+                    (function(i, s, o, g, r, a, m) {
+                        i['GoogleAnalyticsObject'] = r;
+                        i[r] = i[r] || function() {
+                            (i[r].q = i[r].q || []).push(arguments)
+                        }, i[r].l = 1 * new Date();
+                        a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                        a.async = 1;
+                        a.src = g;
+                        m.parentNode.insertBefore(a, m)
+                    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-        <link rel="stylesheet" href="/css/styles.min.css">
-        <script src="/js/vendor/modernizr-2.6.2.min.js"></script>
-    </head>
-	<body>
-	    <div id="main-content">
-	        <!-- Main page content -->
-	        <div id="wrapper">
-	            {{ content }}	
-	        </div>
-	        <div id="sidebar">
-	        <!-- This loops through the site categories -->
-            {% for category in site.categories %} 
-            <h2 id="{{ category[0] }}-ref">{{ category[0] }}</h2>
-            <ul>
-              {% for post in category[1] %} 
-                <li><a href="{{ post.url }}">{{ post.title }}</a></li> 
-              {% endfor %}
-            </ul>
-            <p><a href="#{{ category[0] }}-ref">&#8617;</a></p>
-            {% endfor %}
-	        </div>
-	    </div>
-        {% include header.html %}
-        <script src="/js/vendor/jquery-2.0.3.min.js"></script>
-        <script src="/js/helper.js"></script>
-        <script src="/js/main.js"></script>
-
-        <script>
-            (function (i, s, o, g, r, a, m) {
-                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-            ga('create', 'UA-42330723-1', 'jander.me');
-            ga('send', 'pageview');
-        </script>
-
-    </body>
-</html>
+                    ga('create', 'UA-42330723-1', 'jander.me');
+                    ga('send', 'pageview');
+                </script>
+            </body>
+            
+            </html>

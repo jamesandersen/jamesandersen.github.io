@@ -1,10 +1,8 @@
 <!-- Header -->
-<header>
-    <a href="/">Jander.me</a>
-
-
+<header data-ng-controller="HeaderCtrl">
+    <a href="/"><i class="icon-home icon-2x"></i></a>
     <nav>
-        <a href="#contents">Contents</a>
-        <a href="#"><img id="avatar" src="http://www.gravatar.com/avatar/f93bdcfc26f373f4f6dc0834d951f5cd?s=40"/></a>
+        <a class="contents" href="#contents" data-ng-click="toggleNav($event)"><i class="icon-reorder icon-2x"></i></a>
+        <a href="/about/" alt="About Me"><i class="icon-user icon-2x"></i></a>
     </nav>
 </header>

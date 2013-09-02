@@ -1,3 +1,24 @@
 # Include your project-specific ignores in this file
 # Read about how to use .gitignore: https://help.github.com/articles/ignoring-files
 _site
+.idea
+/_visualstudio/jamesandersen.github.io.v11.suo
+
+_assets/_less/font-awesome.less
+
+assets/css/font-awesome.css
+
+assets/css/font-awesome.min.css
+
+assets/font/FontAwesome.otf
+
+assets/font/fontawesome-webfont.eot
+
+assets/font/fontawesome-webfont.svg
+
+assets/font/fontawesome-webfont.ttf
+
+assets/font/fontawesome-webfont.woff
+node_modules/
+
+js/vendor/jquery.min.js

@@ -1,0 +1,13 @@
+{
+    "name": "jander.me",
+    "version": "0.0.1",
+    "dependencies": {
+        "jquery": "~2.0.0",
+        "font-awesome": "*"
+    },
+    "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+    ]
+}
