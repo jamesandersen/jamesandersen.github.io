@@ -291,10 +291,15 @@ header {
             top: -3px;
             left: -8px;
             text-align: center;
-
+            
+            & > span { 
+                display: block; 
+                .text-shadow(0px 1px 2px rgba(50, 50, 50, 1));
+            }
+            
             .date {
                 font-size: 48px;
-                .text-shadow(0px 1px 2px rgba(50, 50, 50, 1));
+                
             }
 
             .month {
@@ -539,8 +544,8 @@ textarea[contenteditable] {
         @date-size: 100px;
         .post {
 
-            a.post-title {
-                font-size: 30px;
+            .post-title {
+                font-size: @fontSizeExtraLarge;
             }
             .content, .excerpt {
                 .content-columns(1);
@@ -554,9 +559,6 @@ textarea[contenteditable] {
 
     header nav .contents { display: inline-block; }
 
-    #wrapper {
-        border-right-width: 0px;
-    }
     #sidebar {
         left: 50%;
         float: none;
@@ -646,6 +648,39 @@ textarea[contenteditable] {
         }
 
         &.categories ul li:first-letter { font-weight: bold; }
+    }
+    
+    #wrapper {
+        border-right-width: 0px;
+        
+        .post {
+            padding: 15px;
+    
+            .post-title {
+                margin-top: 15px;
+            }
+            
+            .date-block {
+                position: static;
+                height: auto;
+                width: auto;
+                padding: 2px 5px;
+                float: right;
+                margin-right: -15px;
+                margin-top: -15px;
+                
+                .border-top-left-radius(0px);
+                .border-bottom-left-radius(5px);
+                & > span { display: inline-block; }
+                .date, .month {
+                    font-size: @fontSizeMini;
+                }
+            }
+    
+            .shadow {
+                display: none;
+            }
+        }
     }
 }
 

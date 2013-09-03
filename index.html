@@ -7,8 +7,8 @@ title: Welcome!
 <div class="post">
     <div class="shadow"></div>
     <div class="date-block">
-        <div class="date">{{ post.date | date: "%d" }}</div>
-        <div class="month">{{ post.date | date: "%B" }}</div>
+        <span class="date">{{ post.date | date: "%d" }}</span>
+        <span class="month">{{ post.date | date: "%b" }} {{ post.date | date: "%Y" }}</span>
     </div>
     <a class="post-title" href="{{post.url}}">{{ post.title }}</a>
     <div class="excerpt">{{ post.excerpt }}</div>
