@@ -11,16 +11,13 @@ excerpt_separator: ""
 categories:
 - javascript
 ---
-
 {% highlight javascript %}
-
     /**********************************
     **  Functions to sort children of DOM nodes
     **  James Andersen 2-25-05
     **  No license, if you'd like to mention me, that'd be great
     **  http://jander.me
     **********************************/
-    
     function sortChildren(el){
     	//bubbleSortNodes(el.childNodes);
     	insertionSortNodes(el.childNodes);
