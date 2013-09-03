@@ -10,15 +10,7 @@ assets/css/font-awesome.css
 
 assets/css/font-awesome.min.css
 
-assets/font/FontAwesome.otf
 
-assets/font/fontawesome-webfont.eot
-
-assets/font/fontawesome-webfont.svg
-
-assets/font/fontawesome-webfont.ttf
-
-assets/font/fontawesome-webfont.woff
 node_modules/
 
 js/vendor/jquery.min.js

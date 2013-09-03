@@ -1696,10 +1696,13 @@ header nav .contents {
   left: -8px;
   text-align: center;
 }
-#wrapper .post .date-block .date {
-  font-size: 48px;
+#wrapper .post .date-block > span {
+  display: block;
   -moz-text-shadow: 0px 1px 2px #323232;
   text-shadow: 0px 1px 2px #323232;
+}
+#wrapper .post .date-block .date {
+  font-size: 48px;
 }
 #wrapper .post .date-block .month {
   font-size: 12px;
@@ -1829,7 +1832,7 @@ header nav .contents {
 #wrapper .page.about div.panel.github span.date,
 #wrapper .page.about div.panel.stackoverflow span.date {
   float: right;
-  font-size: 11.9px;
+  font-size: 11.998px;
   color: #555555;
   margin: 2px 8px;
 }
@@ -1935,8 +1938,8 @@ textarea[contenteditable] {
    ========================================================================== */
 @media only screen and (max-width: 1000px) {
   /* Style adjustments for viewports that meet the condition */
-  #wrapper .post a.post-title {
-    font-size: 30px;
+  #wrapper .post .post-title {
+    font-size: 24.000004px;
   }
   #wrapper .post .content,
   #wrapper .post .excerpt {
@@ -1952,9 +1955,6 @@ textarea[contenteditable] {
   /* Style adjustments for viewports that meet the condition */
   header nav .contents {
     display: inline-block;
-  }
-  #wrapper {
-    border-right-width: 0px;
   }
   #sidebar {
     left: 50%;
@@ -2083,6 +2083,40 @@ textarea[contenteditable] {
   }
   #sidebar.categories ul li:first-letter {
     font-weight: bold;
+  }
+  #wrapper {
+    border-right-width: 0px;
+  }
+  #wrapper .post {
+    padding: 15px;
+  }
+  #wrapper .post .post-title {
+    margin-top: 15px;
+  }
+  #wrapper .post .date-block {
+    position: static;
+    height: auto;
+    width: auto;
+    padding: 2px 5px;
+    float: right;
+    margin-right: -15px;
+    margin-top: -15px;
+    -webkit-border-top-left-radius: 0px;
+    -moz-border-radius-topleft: 0px;
+    border-top-left-radius: 0px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-bottom-left-radius: 5px;
+  }
+  #wrapper .post .date-block > span {
+    display: inline-block;
+  }
+  #wrapper .post .date-block .date,
+  #wrapper .post .date-block .month {
+    font-size: 10.999799999999999px;
+  }
+  #wrapper .post .shadow {
+    display: none;
   }
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
