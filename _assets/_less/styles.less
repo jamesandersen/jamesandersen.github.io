@@ -117,6 +117,7 @@ header {
     .box-shadow(1px 3px 10px rgba(50, 50, 50, 0.59));
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     text-transform: uppercase;
+    line-height: 1;
 
     a, a:visited {
         color: #efefef;
@@ -141,7 +142,7 @@ header {
     }
 }
 
-@headerHeight: 50px;
+@headerHeight: 40px;
 #main-content {
     max-width: 1024px;
     min-height: 100%;
@@ -154,6 +155,19 @@ header {
     background: rgba(83, 143, 177, 0.3) url('/assets/img/masthead.jpg') center top no-repeat padding-box;
     background-attachment: fixed;
     .box-shadow(1px 3px 16px rgba(50, 50, 50, 0.59));   
+}
+
+div.obsolete, div.update {
+    padding: 5px 10px;
+    .border-radius(10px);
+}
+
+div.obsolete {
+    background-color: @orange;
+}
+
+div.update {
+    background-color: @blueLight;
 }
 
 #sidebar {
@@ -261,7 +275,7 @@ header {
             text-decoration: none;
             &:visited { color: @blueDark; }
             font-family: @sansFontFamily;
-            .text-shadow(@blueLight 0 -2px);
+            .text-shadow(@grayLight 0 -1px);
         }
     }
     

@@ -15,132 +15,32 @@ Here's a snippet for generating synthetic JS events; works in at least mozilla b
 
 **Explanation**: This is what I came up with for a cross-browser way to generate synthetic events. I'm sure someone can improve on it and encapsulate it but this is straight out of Eclipse where I just put it togetherâ€¦ Works in Firefox 1.0 and IE6, haven't tested it elsewhere. I figure anyone interested in this doesn't need further explanation...
 
-
-
-
-
-**The Code**:
-
-
-
-
-    
-    
+{% highlight javascript %}
     //create an event object with appropriate property values
-    if(document.createEvent){
-    evt = document.createEvent("MouseEvents");
-
-
-
-    
-    evt.initMouseEvent("mousedown",false, //can bubble
-
-
-
-    
+    if (document.createEvent){
+        evt = document.createEvent("MouseEvents");
+        evt.initMouseEvent("mousedown",false, //can bubble
     	true,
-
-
-
-    
     	document.defaultView,
-
-
-
-    
     	1,
-
-
-
-    
     	findPosX(deferer), //screen x
-
-
-
-    
     	findPosY(deferer), //screen y
-
-
-
-    
     	findPosX(deferer), //client x
-
-
-
-    
     	findPosY(deferer), //client y
-
-
-
-    
     	false,
-
-
-
-    
     	false,
-
-
-
-    
     	false,
-
-
-
-    
     	1,
-
-
-
-    
     	deferer);
-
-
-
-    
     	to.dispatchEvent(evt);
-
-
-
-    
-    }else{
-
-
-
-    
+    } else {
     	var evt = document.createEventObject();
-
-
-
-    
-    // Set an expando property on the event object.
-
-
-
-    
-    // This will be used by the
-
-
-
-    
-    // event handler to determine what element was clicked on.
-
-
-
-    
+        // Set an expando property on the event object.
+        // This will be used by the
+        // event handler to determine what element was clicked on.
     	evt.clientX = findPosX(deferer);
-
-
-
-    
     	evt.clientY = findPosY(deferer);
-
-
-
-    
     	to.fireEvent("onmousedown",evt);
-
-
-
-    
-    	evt.cancelBubble = true;}
+    	evt.cancelBubble = true;
+    }
+{% endhighlight %}

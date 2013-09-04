@@ -1482,6 +1482,7 @@ header {
   right: 0;
   z-index: 100;
   text-transform: uppercase;
+  line-height: 1;
 }
 header a,
 header a:visited {
@@ -1525,6 +1526,19 @@ header nav .contents {
   -webkit-box-shadow: 1px 3px 16px rgba(50, 50, 50, 0.59);
   -moz-box-shadow: 1px 3px 16px rgba(50, 50, 50, 0.59);
   box-shadow: 1px 3px 16px rgba(50, 50, 50, 0.59);
+}
+div.obsolete,
+div.update {
+  padding: 5px 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+div.obsolete {
+  background-color: #f89406;
+}
+div.update {
+  background-color: #cceeee;
 }
 #sidebar {
   padding-top: 20px;
@@ -1648,7 +1662,7 @@ header nav .contents {
 #wrapper .post,
 #wrapper .page {
   background-color: rgba(230, 230, 230, 0.8);
-  margin: 50px 20px 0px 20px;
+  margin: 40px 20px 0px 20px;
   -webkit-box-shadow: 1px 3px 16px rgba(50, 50, 50, 0.59);
   -moz-box-shadow: 1px 3px 16px rgba(50, 50, 50, 0.59);
   box-shadow: 1px 3px 16px rgba(50, 50, 50, 0.59);
@@ -1660,8 +1674,8 @@ header nav .contents {
   color: #003261;
   text-decoration: none;
   font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
-  -moz-text-shadow: #ccccee 0 -2px;
-  text-shadow: #ccccee 0 -2px;
+  -moz-text-shadow: #999999 0 -1px;
+  text-shadow: #999999 0 -1px;
 }
 #wrapper .post .post-title:visited,
 #wrapper .page .post-title:visited {
@@ -1967,7 +1981,7 @@ textarea[contenteditable] {
     height: 95%;
     padding-top: 0px;
     box-sizing: border-box;
-    border-top: solid transparent 70px;
+    border-top: solid transparent 60px;
     -webkit-border-bottom-right-radius: 6px;
     -moz-border-radius-bottomright: 6px;
     border-bottom-right-radius: 6px;
