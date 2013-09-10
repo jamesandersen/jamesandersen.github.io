@@ -1,0 +1,3 @@
+[submodule "mathfacts"]
+	path = mathfacts
+	url = https://github.com/jamesandersen/mathfacts.git
