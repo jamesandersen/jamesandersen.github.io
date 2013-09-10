@@ -7,4 +7,13 @@ author :
   github : jamesandersen
   twitter : jandersen78
   
-exclude: ["bower_components", "bower.json", "Gruntfile.js", "node_modules"]
+exclude:
+  - bower_components
+  - bower.json
+  - Gruntfile.js
+  - node_modules
+  - Gemfile
+  - travis.yml
+  - config.rb
+  - package.json
+  - CNAME
