@@ -1436,6 +1436,9 @@ body {
   height: 100%;
   position: relative;
 }
+body.navopen {
+  overflow: hidden;
+}
 body:before,
 body:after {
   content: '';
@@ -1470,7 +1473,7 @@ header {
   display: block;
   background-color: #003261;
   color: #efefef;
-  font-size: 18px;
+  font-size: 17.9998px;
   padding: 4px 20px;
   border-bottom: 2px solid #555555;
   -webkit-box-shadow: 1px 3px 10px rgba(50, 50, 50, 0.59);
@@ -1483,6 +1486,7 @@ header {
   z-index: 100;
   text-transform: uppercase;
   line-height: 1;
+  text-align: center;
 }
 header a,
 header a:visited {
@@ -1503,12 +1507,19 @@ header #avatar {
   -moz-border-radius: 6px;
   border-radius: 6px;
 }
+header .home {
+  float: left;
+}
 header nav {
   display: inline-block;
   float: right;
 }
 header nav .contents {
   display: none;
+}
+header .title {
+  font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+  font-size: 24.000004px;
 }
 #main-content {
   max-width: 1024px;
@@ -1575,15 +1586,6 @@ div.update {
   right: 0;
   background-color: rgba(220, 220, 220, 0.8);
   padding: 0 5px;
-  /*
-        &.archive div ul {
-            @indent: 45px;
-             li{ 
-                padding-left: @indent;
-                &:first-letter { margin-left: -@indent; }
-             }
-        } */
-
 }
 #sidebar section h3 {
   text-align: center;
@@ -1659,17 +1661,19 @@ div.update {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-#wrapper .post,
-#wrapper .page {
+.post,
+.page {
   background-color: rgba(230, 230, 230, 0.8);
-  margin: 40px 20px 0px 20px;
+  margin: 20px 20px 0px 20px;
+  border: 0px solid green;
+  border-top-width: 3px;
   -webkit-box-shadow: 1px 3px 16px rgba(50, 50, 50, 0.59);
   -moz-box-shadow: 1px 3px 16px rgba(50, 50, 50, 0.59);
   box-shadow: 1px 3px 16px rgba(50, 50, 50, 0.59);
   padding: 10px;
 }
-#wrapper .post .post-title,
-#wrapper .page .post-title {
+.post .post-title,
+.page .post-title {
   font-size: 40px;
   color: #003261;
   text-decoration: none;
@@ -1677,11 +1681,11 @@ div.update {
   -moz-text-shadow: #999999 0 -1px;
   text-shadow: #999999 0 -1px;
 }
-#wrapper .post .post-title:visited,
-#wrapper .page .post-title:visited {
+.post .post-title:visited,
+.page .post-title:visited {
   color: #003261;
 }
-#wrapper .post {
+.post {
   min-height: 200px;
   padding: 10px 20px 10px 120px;
   -webkit-border-bottom-right-radius: 5px;
@@ -1690,11 +1694,9 @@ div.update {
   -webkit-border-bottom-left-radius: 5px;
   -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
-  border: 0px solid green;
-  border-top-width: 3px;
   position: relative;
 }
-#wrapper .post .date-block {
+.post .date-block {
   position: absolute;
   width: 100px;
   height: 100px;
@@ -1710,19 +1712,19 @@ div.update {
   left: -8px;
   text-align: center;
 }
-#wrapper .post .date-block > span {
+.post .date-block > span {
   display: block;
   -moz-text-shadow: 0px 1px 2px #323232;
   text-shadow: 0px 1px 2px #323232;
 }
-#wrapper .post .date-block .date {
+.post .date-block .date {
   font-size: 48px;
 }
-#wrapper .post .date-block .month {
+.post .date-block .month {
   font-size: 12px;
   text-transform: uppercase;
 }
-#wrapper .post .shadow {
+.post .shadow {
   position: absolute;
   width: 82px;
   color: white;
@@ -1730,7 +1732,7 @@ div.update {
   left: 0;
   bottom: 0;
 }
-#wrapper .post .shadow:before {
+.post .shadow:before {
   content: '';
   position: absolute;
   left: 0;
@@ -1746,7 +1748,7 @@ div.update {
   background-repeat: no-repeat;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#33646464', endColorstr='#00646464', GradientType=0);
 }
-#wrapper .post .shadow:after {
+.post .shadow:after {
   content: '';
   position: absolute;
   left: 0;
@@ -1762,31 +1764,17 @@ div.update {
   background-repeat: no-repeat;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00646464', endColorstr='#1a646464', GradientType=0);
 }
-#wrapper .post .content,
-#wrapper .post .excerpt {
-  /* Firefox doesn't support column-span... 
-                need to come up with some solution before
-                enabling columns
-            .content-columns(2);
-            .highlight {
-                -webkit-column-span: all;
-                -moz-column-span: all;
-                column-span: all;
-            }
-            */
-
-}
-#wrapper .post .content img,
-#wrapper .post .excerpt img {
+.post .content img,
+.post .excerpt img {
   max-width: 95%;
   height: auto;
   margin: 15px auto;
 }
-#wrapper .post .excerpt {
+.post .excerpt {
   font-style: italic;
   font-size: 14px;
 }
-#wrapper .page.about div.panel {
+.page.about div.panel {
   display: inline-block;
   vertical-align: top;
   width: 47%;
@@ -1795,16 +1783,16 @@ div.update {
   padding: 10px;
   box-sizing: border-box;
 }
-#wrapper .page.about div.panel h2 {
+.page.about div.panel h2 {
   margin-left: -10px;
   margin-top: -10px;
 }
-#wrapper .page.about div.panel h2 i[class*='icon'] {
+.page.about div.panel h2 i[class*='icon'] {
   vertical-align: middle;
   margin-right: 8px;
 }
-#wrapper .page.about div.panel.github ul,
-#wrapper .page.about div.panel.stackoverflow ul {
+.page.about div.panel.github ul,
+.page.about div.panel.stackoverflow ul {
   padding: 5px 5px 5px 35px;
   max-height: 250px;
   overflow: auto;
@@ -1812,17 +1800,17 @@ div.update {
   border-radius: 6px;
   margin: 5px 0;
 }
-#wrapper .page.about div.panel.github ul li,
-#wrapper .page.about div.panel.stackoverflow ul li {
+.page.about div.panel.github ul li,
+.page.about div.panel.stackoverflow ul li {
   list-style-type: none;
   padding-bottom: 8px;
   border-bottom: solid #eeeeee 1px;
   margin-bottom: 6px;
 }
-#wrapper .page.about div.panel.github ul li:before,
-#wrapper .page.about div.panel.stackoverflow ul li:before,
-#wrapper .page.about div.panel.github ul li:after,
-#wrapper .page.about div.panel.stackoverflow ul li:after {
+.page.about div.panel.github ul li:before,
+.page.about div.panel.stackoverflow ul li:before,
+.page.about div.panel.github ul li:after,
+.page.about div.panel.stackoverflow ul li:after {
   content: " ";
   /* 1 */
 
@@ -1830,27 +1818,27 @@ div.update {
   /* 2 */
 
 }
-#wrapper .page.about div.panel.github ul li:after,
-#wrapper .page.about div.panel.stackoverflow ul li:after {
+.page.about div.panel.github ul li:after,
+.page.about div.panel.stackoverflow ul li:after {
   clear: both;
 }
-#wrapper .page.about div.panel.github ul li a.repo,
-#wrapper .page.about div.panel.stackoverflow ul li a.repo {
+.page.about div.panel.github ul li a.repo,
+.page.about div.panel.stackoverflow ul li a.repo {
   color: #333333;
 }
-#wrapper .page.about div.panel.github span[class*='icon'],
-#wrapper .page.about div.panel.stackoverflow span[class*='icon'] {
+.page.about div.panel.github span[class*='icon'],
+.page.about div.panel.stackoverflow span[class*='icon'] {
   margin-left: -30px;
   margin-top: -5px;
 }
-#wrapper .page.about div.panel.github span.date,
-#wrapper .page.about div.panel.stackoverflow span.date {
+.page.about div.panel.github span.date,
+.page.about div.panel.stackoverflow span.date {
   float: right;
   font-size: 11.998px;
   color: #555555;
   margin: 2px 8px;
 }
-#wrapper .page.about div.panel iframe[id^='twitter-widget-'] {
+.page.about div.panel iframe[id^='twitter-widget-'] {
   width: 100%;
 }
 @media only screen and (max-width: 930px) {
@@ -1952,11 +1940,14 @@ textarea[contenteditable] {
    ========================================================================== */
 @media only screen and (max-width: 1000px) {
   /* Style adjustments for viewports that meet the condition */
-  #wrapper .post .post-title {
+  .post .post-title,
+  .page .post-title {
     font-size: 24.000004px;
   }
-  #wrapper .post .content,
-  #wrapper .post .excerpt {
+  .post .content,
+  .page .content,
+  .post .excerpt,
+  .page .excerpt {
     -webkit-column-count: 1;
     -moz-column-count: 1;
     column-count: 1;
@@ -1981,7 +1972,7 @@ textarea[contenteditable] {
     height: 95%;
     padding-top: 0px;
     box-sizing: border-box;
-    border-top: solid transparent 60px;
+    border-top: solid transparent 40px;
     -webkit-border-bottom-right-radius: 6px;
     -moz-border-radius-bottomright: 6px;
     border-bottom-right-radius: 6px;
@@ -1993,13 +1984,14 @@ textarea[contenteditable] {
     box-shadow: 1px 3px 10px rgba(30, 30, 50, 0.79);
     top: 0px;
     color: #eeeeee;
-    background-color: #222222;
+    background-color: #003261;
   }
   #sidebar.open {
     opacity: 1;
     display: block;
   }
   #sidebar .tabs {
+    margin-top: 20px;
     position: absolute;
     left: 0;
     right: 0;
@@ -2024,7 +2016,7 @@ textarea[contenteditable] {
   }
   #sidebar section {
     background-color: transparent;
-    padding-top: 35px;
+    padding-top: 55px;
     padding-bottom: 5px;
     box-sizing: border-box;
     position: absolute;
@@ -2101,13 +2093,16 @@ textarea[contenteditable] {
   #wrapper {
     border-right-width: 0px;
   }
-  #wrapper .post {
+  .post,
+  .page {
     padding: 15px;
   }
-  #wrapper .post .post-title {
-    margin-top: 15px;
+  .post .post-title,
+  .page .post-title {
+    margin-top: 5px;
   }
-  #wrapper .post .date-block {
+  .post .date-block,
+  .page .date-block {
     position: static;
     height: auto;
     width: auto;
@@ -2122,15 +2117,26 @@ textarea[contenteditable] {
     -moz-border-radius-bottomleft: 5px;
     border-bottom-left-radius: 5px;
   }
-  #wrapper .post .date-block > span {
+  .post .date-block > span,
+  .page .date-block > span {
     display: inline-block;
   }
-  #wrapper .post .date-block .date,
-  #wrapper .post .date-block .month {
+  .post .date-block .date,
+  .page .date-block .date,
+  .post .date-block .month,
+  .page .date-block .month {
     font-size: 10.999799999999999px;
   }
-  #wrapper .post .shadow {
+  .post .shadow,
+  .page .shadow {
     display: none;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .post,
+  .page {
+    padding: 10px;
+    margin: 20px 0px 0px 0px;
   }
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {

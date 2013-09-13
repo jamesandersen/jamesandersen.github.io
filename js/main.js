@@ -179,29 +179,29 @@
     }]);
     
     angular.module('jander').controller('HeaderCtrl', ['$scope', 'navigation', function ($scope, navigation) {
-            $scope.toggleNav = navigation.toggleNavMenu;
+        $scope.toggleNav = navigation.toggleNavMenu;
     }]);
 
-    angular.module('jander').controller('SidebarCtrl', ['$scope', '$timeout', '$animate', 'CONSTANTS', 'navigation', function ($scope, $timeout, $animate, CONSTANTS, navigation) {
-            //            $scope.navOpen = false, $scope.docked = true;
-            //            $scope.docked = navigation.docked();
+    angular.module('jander').controller('SidebarCtrl', ['$scope', '$timeout', '$animate', '$document', 'CONSTANTS', 'navigation', function ($scope, $timeout, $animate, $document, CONSTANTS, navigation) {
 
-            // TODO: move to a directive of some kind... shouldn't touch the DOM here
-            var sidebar = angular.element('#sidebar'),
-                navOpen = false;
-            var deregisterDockStateChangeHandler = $scope.$on(CONSTANTS.EVENTS.NAV_DOCK_STATE_CHANGE, function (eventName, eventArgs) {
-                $scope.$apply(function () {
-                    if (eventArgs === CONSTANTS.NAV_STATES.DOCKED && navigation.navOpen()) {
-                        sidebar.removeClass('open');
-                        navigation.toggleNavMenu(true);
-                    }
-                });
+        // TODO: move to a directive of some kind... shouldn't touch the DOM here
+        var sidebar = angular.element('#sidebar'),
+            navOpen = false;
+        var deregisterDockStateChangeHandler = $scope.$on(CONSTANTS.EVENTS.NAV_DOCK_STATE_CHANGE, function (eventName, eventArgs) {
+            $scope.$apply(function () {
+                if (eventArgs === CONSTANTS.NAV_STATES.DOCKED && navigation.navOpen()) {
+                    sidebar.removeClass('open');
+                    navigation.toggleNavMenu(true);
+                }
             });
+        });
 
-            var unwatchNav = $scope.$watch(navigation.navOpen, function (newVal, oldVal) {
-                $animate[newVal ? 'addClass' : 'removeClass'].call(undefined, sidebar, 'open');
-            });
-            }]);
+        var unwatchNav = $scope.$watch(navigation.navOpen, function (newVal, oldVal) {
+            $animate[newVal ? 'addClass' : 'removeClass'].call(undefined, sidebar, 'open');
+            var $body = angular.element($document[0].body);
+            $body[newVal ? 'addClass' : 'removeClass'].call($body, 'navopen');
+        });
+    }]);
 
     angular.element(document).ready(function () {
         angular.bootstrap(document, ['jander']);

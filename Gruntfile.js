@@ -30,9 +30,9 @@ module.exports = function (grunt) {
             src: {
                 files: ['js/*.js', '_assets/_less/*.less', '_includes/*.html', '_layouts/*.html', '_posts/*.markdown', 'about/*.html', '!lib/dontwatch.js'],
                 tasks: ['concurrent:compile', 'exec:build'],
-                options: {
+                /*options: {
                     livereload: true
-                }
+                }*/
             }
         },
         copy: {
