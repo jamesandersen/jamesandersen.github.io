@@ -1,5 +1,6 @@
 /* @pjs preload="data/USA_MAP_smaller.jpg"; */
 
+/* Returns a distance between two points */
 function lineDistance( x1, y1, x2, y2 )
 {
   var xs = x2 - x1;
@@ -36,17 +37,15 @@ PFont large;
 final int WIDTH = 800;
 final int HEIGHT = 432;
 
-final float slcLatitude = 40.75238;
-final float slcLongitude = -111.87669;
+final float slcLatitude = 40.7500;
+final float slcLongitude = -111.8833;
 float slcX;
 float slcY;
 
-float minLatitude = 24.49331;
-float maxLatitude = 49.67201;
+float minLatitude = 27.625393;
+float maxLatitude = 49.916967;
 float minLongitude = -125.54369;
 float maxLongitude = -66.39330;
-//java.util.Date minDate = null;
-//java.util.Date maxDate = null;
 var minDate = null;
 var maxDate = null;
 int minIndividuals = 10000000;
@@ -54,8 +53,6 @@ int maxIndividuals = 0;
 
 // slider vars
 double secondsPerYear;
-//java.util.Date beginScale;
-//java.util.Date endScale;
 var beginScale, endScale;
 
 int paddingSides = 0;
@@ -85,18 +82,20 @@ boolean record = false;
 
 void setup()
 {
-  // this causes an incorrect applet size
-  //size(WIDTH, HEIGHT);
-  size(800, 432);
+  size(window.innerWidth, window.innerHeight);
+  
+  // send processing output to the web dev console
+  Processing.logger = console || function() {};
   
   large = createFont("Georgia", 24, true);
   small = createFont("Georgia", 10, true);
   
   // See http://viewer.nationalmap.gov/viewer/?p=default&b=base3&x=-10365185.449108005&y=4623664.928263873&l=5&v=govunit%3A18%3B16
   usmap = loadImage("data/USA_MAP_smaller.jpg");
+  usmap.resize(width, 0);
   
   slcX = map(slcLongitude, minLongitude, maxLongitude, 0, width);
-  slcY = height - map(slcLatitude, minLatitude, maxLatitude, 0, height) + 20;
+  slcY = height - map(slcLatitude, minLatitude, maxLatitude, 0, height);
   
   String[] lines = loadStrings("data/companies.tsv");
   
@@ -156,6 +155,7 @@ void setup()
 
 void draw()
 {
+  
   image(usmap, 0, 0);
   
   curListY = listY;
@@ -169,18 +169,7 @@ void draw()
    
    if(pctTime > 1.0f)
    {
-     if(record)
-    { 
-      mm.finish();
-    }
      autorun = false;
-   }
-   else
-   {
-     if(record)
-     {
-       mm.addFrame();
-     }
    }
   }
 }
@@ -221,8 +210,8 @@ Company InitCompany(String[] tokens)
       println(e);
     }
     
-    company.x1 = map(company.longitude, minLongitude, maxLongitude, 0, WIDTH);
-    company.y1 = HEIGHT - map(company.latitude, minLatitude, maxLatitude, 0, HEIGHT) + 20;
+    company.x1 = map(company.longitude, minLongitude, maxLongitude, 0, width);
+    company.y1 = height - map(company.latitude, minLatitude, maxLatitude, 0, height);
     company.x2 = slcX;
     company.y2 = slcY;
     
@@ -325,7 +314,7 @@ void drawDepartureCities()
     
     idx++;
   }
-  /*
+  
   if(traveling.size() > 0)
   {
     rectMode(CORNERS);
@@ -363,7 +352,6 @@ void drawDepartureCities()
     
     idx++;
   }
-  */
 }
 
 boolean drawBezier(float x1, float y1, float cx1, float cy1, float cx2, float cy2, float x2, float y2, float pct, int idx)
