@@ -6,7 +6,7 @@ layout: post
 slug: librivoxorg-rocks
 title: Librivox.org Rocks!
 wordpress_id: 15
-categories:
+tags:
 - books
 ---
 

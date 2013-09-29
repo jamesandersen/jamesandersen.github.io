@@ -6,7 +6,7 @@ layout: post
 slug: synthetic-events
 title: Synthetic Events
 wordpress_id: 9
-categories:
+tags:
 - javascript
 ---
 

@@ -6,6 +6,9 @@ layout: post
 slug: postgresql-full-text-search
 title: PostgreSQL Full Text Search
 wordpress_id: 8
+tags:
+- postgreSQL
+- linux
 ---
 
 [Implementing Full Text Indexing with PostgreSQL](http://www.devx.com/opensource/Article/21674/0/page/1)

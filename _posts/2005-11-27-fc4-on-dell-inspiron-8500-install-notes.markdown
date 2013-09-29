@@ -6,6 +6,9 @@ layout: post
 slug: fc4-on-dell-inspiron-8500-install-notes
 title: FC4 on Dell Inspiron 8500 - Install Notes
 wordpress_id: 11
+tags:
+- linux
+- Windows
 ---
 
 OK, so my XP pro install on my laptop cratered which was all I needed to finally get me to try installing linux on it which I'd been wanting to try for a while.Ã‚  I expected to hit some snags but that didn't really make the late hours combing the web any less frustrating... Maybe this will be useful to someone out there...

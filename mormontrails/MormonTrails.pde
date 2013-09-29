@@ -1,5 +1,6 @@
 /* @pjs preload="data/USA_MAP_smaller.jpg"; */
 
+/* Returns a distance between two points */
 function lineDistance( x1, y1, x2, y2 )
 {
   var xs = x2 - x1;
@@ -29,6 +30,8 @@ function dateFormat(date) {
     return '' + month_names[date.getMonth()] + '. ' + date.getFullYear();
 }
 
+var title = "Mormon Pioneer Overland Travel";
+
 PImage usmap;
 PFont small;
 PFont large;
@@ -36,17 +39,15 @@ PFont large;
 final int WIDTH = 800;
 final int HEIGHT = 432;
 
-final float slcLatitude = 40.75238;
-final float slcLongitude = -111.87669;
+final float slcLatitude = 40.7500;
+final float slcLongitude = -111.8833;
 float slcX;
 float slcY;
 
-float minLatitude = 24.49331;
-float maxLatitude = 49.67201;
+float minLatitude = 27.625393;
+float maxLatitude = 49.916967;
 float minLongitude = -125.54369;
 float maxLongitude = -66.39330;
-//java.util.Date minDate = null;
-//java.util.Date maxDate = null;
 var minDate = null;
 var maxDate = null;
 int minIndividuals = 10000000;
@@ -54,8 +55,6 @@ int maxIndividuals = 0;
 
 // slider vars
 double secondsPerYear;
-//java.util.Date beginScale;
-//java.util.Date endScale;
 var beginScale, endScale;
 
 int paddingSides = 0;
@@ -71,32 +70,34 @@ int trackTop;
 float thumb;
 
 float pctTime = 0f;
-float perFrameIncrement = 0.001f;
+float perFrameIncrement = 0.0005f;
 boolean autorun = false;
 
 float listX = 30;
 float listY = 30;
-float listYincrement = 20;
+float listYincrement = 24;
 float curListY;
 
 Company[] companies;
 
-boolean record = false;
+var activeLink = '';
 
 void setup()
 {
-  // this causes an incorrect applet size
-  //size(WIDTH, HEIGHT);
-  size(800, 432);
+  size(window.innerWidth, window.innerHeight);
+  
+  // send processing output to the web dev console
+  Processing.logger = console || function() {};
   
   large = createFont("Georgia", 24, true);
   small = createFont("Georgia", 10, true);
   
   // See http://viewer.nationalmap.gov/viewer/?p=default&b=base3&x=-10365185.449108005&y=4623664.928263873&l=5&v=govunit%3A18%3B16
   usmap = loadImage("data/USA_MAP_smaller.jpg");
+  usmap.resize(width, 0);
   
   slcX = map(slcLongitude, minLongitude, maxLongitude, 0, width);
-  slcY = height - map(slcLatitude, minLatitude, maxLatitude, 0, height) + 20;
+  slcY = height - map(slcLatitude, minLatitude, maxLatitude, 0, height);
   
   String[] lines = loadStrings("data/companies.tsv");
   
@@ -156,10 +157,13 @@ void setup()
 
 void draw()
 {
+  
   image(usmap, 0, 0);
+  activeLink = null;
   
   curListY = listY;
   thumb = map(pctTime, 0.0, 1.0, trackLeft, trackRight);
+  drawInstructions();
   drawDepartureCities();
   drawSlider();
   
@@ -169,18 +173,7 @@ void draw()
    
    if(pctTime > 1.0f)
    {
-     if(record)
-    { 
-      mm.finish();
-    }
      autorun = false;
-   }
-   else
-   {
-     if(record)
-     {
-       mm.addFrame();
-     }
    }
   }
 }
@@ -192,8 +185,12 @@ void keyPressed()
 
 void mousePressed()
 {
-  println("mouseX=" + mouseX + " thumb=" + thumb + "    mouseY=" + mouseY + "  top=" + top + "  sliderheight=" + sliderHeight);
-  if(mouseX > trackLeft && mouseX < trackRight && mouseY > top && mouseY < (top + sliderHeight))
+  //println("mouseX=" + mouseX + " thumb=" + thumb + "    mouseY=" + mouseY + "  top=" + top + "  sliderheight=" + sliderHeight);
+  
+  if(activeLink) {
+    link(activeLink, '_new');
+  }
+  else if(mouseX > trackLeft && mouseX < trackRight && mouseY > top && mouseY < (top + sliderHeight))
   {
      autorun = false;
      pctTime = map(min(max(mouseX, trackLeft), trackRight), trackLeft, trackRight, 0.0, 1.0);
@@ -221,8 +218,8 @@ Company InitCompany(String[] tokens)
       println(e);
     }
     
-    company.x1 = map(company.longitude, minLongitude, maxLongitude, 0, WIDTH);
-    company.y1 = HEIGHT - map(company.latitude, minLatitude, maxLatitude, 0, HEIGHT) + 20;
+    company.x1 = map(company.longitude, minLongitude, maxLongitude, 0, width);
+    company.y1 = height - map(company.latitude, minLatitude, maxLatitude, 0, height);
     company.x2 = slcX;
     company.y2 = slcY;
     
@@ -269,9 +266,11 @@ void drawDepartureCities()
   textAlign(RIGHT);
   textFont(large);
   fill(248, 242, 230, 150);
-  text(dateFormat(curDate), width - 59, 42);
+  text(title, width - 59, 42)
+  text(dateFormat(curDate), width - 59, 72);
   fill(97, 75, 24);
-  text(dateFormat(curDate), width - 60, 40);
+  text(title, width - 60, 40);
+  text(dateFormat(curDate), width - 60, 70);
   
   
   ArrayList traveling = new ArrayList();
@@ -279,6 +278,7 @@ void drawDepartureCities()
   ArrayList annotations = new ArrayList();
   var companyPt = null;
   
+  bool anyMouseover = false;
   for(int i = 0; i < companies.length; i++)
   {
     // set the stroke weight to reflect the number of travelers in the company
@@ -305,9 +305,13 @@ void drawDepartureCities()
       point(companies[i].x1, companies[i].y1); 
     }
     
-    if(drawBezier(companies[i].x1, companies[i].y1, companies[i].cx1, companies[i].cy1, companies[i].cx2, companies[i].cy2, companies[i].x2, companies[i].y2, companyPct, traveling.size()))
+    bool underMouse = drawBezier(companies[i].x1, companies[i].y1, companies[i].cx1, companies[i].cy1, companies[i].cx2, companies[i].cy2, companies[i].x2, companies[i].y2, companyPct, traveling.size());
+    anyMouseover =  underMouse || anyMouseover;
+    if(underMouse)
     {
       annotations.add(companies[i]);
+      
+      if(!activeLink) activeLink = companies[i].linkUrl;
     }
   }
   
@@ -325,45 +329,49 @@ void drawDepartureCities()
     
     idx++;
   }
-  /*
-  if(traveling.size() > 0)
-  {
-    rectMode(CORNERS);
-    strokeWeight(2);
-    stroke(200, 200, 200, 200);
-    fill(255, 255, 255, 220);
-    rect(listX - 5, listY - 15, listX + 340, listY + ((traveling.size() - 1) * listYincrement)  + 5);
-  }
   
-  idx = 1;
-  for(Company company : traveling)
-  {
-    // draw a city label
-    textAlign(CENTER);
-    textSize(12);
-    fill(0, 0, 0);
-    text(company.city, company.x1, company.y1); 
-    
-    // print the company info
-    // draw a label
-    stroke(0);
-    strokeWeight(20);
-    point(listX + 5, curListY - 5);
-    stroke(255);
-    strokeWeight(17);
-    point(listX + 5, curListY - 5);
-    fill(0);
-    textSize(10);
-    textAlign(CENTER);
-    text(str(idx), listX + 5, curListY);
-    
-    textAlign(LEFT);
-    text(company.name, listX + 20, curListY);
-    curListY += listYincrement;
-    
-    idx++;
+  if(!anyMouseover) {
+      // the traveling list and mouseover detail are drawn in the same area
+      // only show one or the other
+      if(traveling.size() > 0)
+      {
+        rectMode(CORNERS);
+        strokeWeight(2);
+        stroke(200, 200, 200, 200);
+        fill(255, 255, 255, 220);
+        rect(listX - 5, listY - 15, listX + 340, listY + ((traveling.size() - 1) * listYincrement)  + 5);
+      }
+      
+      idx = 1;
+  
+      for(Company company : traveling)
+      {
+        // draw a city label
+        textAlign(CENTER);
+        textSize(12);
+        fill(0, 0, 0);
+        text(company.city, company.x1, company.y1); 
+        
+        // print the company info
+        // draw a label
+        stroke(0);
+        strokeWeight(20);
+        point(listX + 5, curListY - 5);
+        stroke(255);
+        strokeWeight(17);
+        point(listX + 5, curListY - 5);
+        fill(0);
+        textSize(12);
+        textAlign(CENTER);
+        text(str(idx), listX + 5, curListY);
+        
+        textAlign(LEFT);
+        text(company.name, listX + 20, curListY);
+        curListY += listYincrement;
+        
+        idx++;
+      }
   }
-  */
 }
 
 boolean drawBezier(float x1, float y1, float cx1, float cy1, float cx2, float cy2, float x2, float y2, float pct, int idx)
@@ -480,11 +488,11 @@ void drawSlider()
   
   // draw the thumb
   strokeWeight(15);
-  stroke(255, 0, 0, 200);
+  stroke(32, 129, 227, 255);
   point(thumb, trackTop + 10);
   strokeWeight(3);
   line(thumb, trackTop - 10, thumb, trackTop + 10);
-  stroke(255);
+  stroke(220, 220, 255, 255);
   strokeWeight(7);
   point(thumb, trackTop + 10);
   
@@ -501,3 +509,14 @@ void drawSlider()
   }
 }
 
+void drawInstructions() {
+  var instText = 'Drag the timeline or\npress any key to play animation';
+  
+  textAlign(CENTER);
+  textFont(small);
+  textSize(16);
+  fill(255, 255, 255, 255);
+  text(instText, width * 0.88, trackTop - 49);
+  fill(50, 50, 50, 255);
+  text(instText, width * 0.88, trackTop - 50);
+}

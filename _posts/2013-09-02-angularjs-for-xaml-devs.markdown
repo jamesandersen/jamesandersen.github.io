@@ -3,11 +3,12 @@ author: jandersen
 comments: true
 layout: post
 title: AngularJS for XAML Devs
-categories:
-- angularjs
-- xaml
 tags:
-- angularjs xaml javascript silverlight wpf
+- angularjs 
+- xaml
+- javascript
+- silverlight
+- wpf
 ---
 
 Not long ago I was selecting a javascript framework for a large client web project.  The client's existing applications made heavy use of Microsoft technologies so one factor in my choice was how would the framework "feel" coming from a background in Microsoft UI technologies.   Having built [Silverlight](http://www.microsoft.com/silverlight/), [WPF](http://msdn.microsoft.com/en-us/library/ms754130.aspx) and [Windows Phone](https://dev.windowsphone.com/en-US) apps myself, I felt particularly drawn to [AngularJS](http://angularjs.org/).  Below I'm calling out some core XAML concepts and their corresponding concepts in Angular.  Along the way I'll also note some key differences you should understand if you're coming from the world of XAML development.
