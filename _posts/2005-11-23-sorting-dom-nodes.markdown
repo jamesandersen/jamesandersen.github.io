@@ -8,7 +8,7 @@ title: Sorting DOM Nodes
 wordpress_id: 10
 excerpt: A routine for sorting DOM nodes
 excerpt_separator: ""
-categories:
+tags:
 - javascript
 ---
 {% highlight javascript %}

@@ -6,8 +6,10 @@ layout: post
 slug: use-xsl-to-create-advanced-office-docs-from-a-webapp
 title: Use XSL To Create Advanced Office Docs from a Webapp
 wordpress_id: 16
-categories:
-- XML/XSL
+tags:
+- XML
+- XSL
+- MS Office
 ---
 
 Creating Office documents--spreadsheets (Excel), or printable word processing documents (Word), etc--with some kind of dynamic data seems to be a fairly common user requirement for applications, web or otherwise.  On the web, creating these documents can be a little tricky.  It helps that Word, Excel and others can actually read HTML so without too much trouble you can send a response back with the `Content-Type` header set to `"application/msword"` and then just output html and it will open in Word.  However, HTML only takes you so far, what if you need to take advantage of some of the more advanced features available in the target application?

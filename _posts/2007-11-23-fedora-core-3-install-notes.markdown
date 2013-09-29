@@ -6,6 +6,9 @@ layout: post
 slug: fedora-core-3-install-notes
 title: Fedora Core 3 Install Notes
 wordpress_id: 21
+tags:
+- linux
+- fedora
 ---
 
 Fedora Core 3 Installation Notes

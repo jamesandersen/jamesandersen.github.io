@@ -6,7 +6,7 @@ layout: post
 slug: the-web-as-database-rss-screenscraping
 title: 'Screen Scrape No More: The Web As A Database'
 wordpress_id: 17
-categories:
+tags:
 - Flex
 - RSS
 ---

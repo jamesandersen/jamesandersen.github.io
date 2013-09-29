@@ -6,6 +6,9 @@ layout: post
 slug: postgresql-tips
 title: PostgreSQL Tips
 wordpress_id: 7
+tags:
+- linux
+- postgreSQL
 ---
 
 ...useful with the "could not find tsearch config by locale" error `pg_controldata [data dir] | grep LC`
